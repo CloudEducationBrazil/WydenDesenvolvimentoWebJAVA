@@ -10,6 +10,14 @@ public class Principal {
 		julia.bim3 = 90;
 		julia.bim4 = 80;
 		
+		int a, b;
+		double c;
+		
+		a = 9;
+		b = 2;
+		c =  a * 1.00 / b;
+		
+		System.out.println(c);
 		System.out.println(julia.media());
 		System.out.println(julia.passouDeAno());
 	}
