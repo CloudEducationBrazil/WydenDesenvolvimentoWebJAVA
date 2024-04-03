@@ -1,6 +1,7 @@
 package programas;
 
 import programas.entities.Cargo;
+//import programas.entities.Funcionario;
 import programas.entities.Funcionario;
 
 public class POOJava {
