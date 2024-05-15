@@ -3,7 +3,6 @@ package com.uniruy.userdept.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,45 +25,55 @@ public class DepartmentController<JSONObject> {
 	DepartmentService service;
 
 	@GetMapping
-	public ResponseEntity<List<Department>> findAll(){
-		List<Department> result = service.findAll();
+	public ResponseEntity<List<Department>> getAllDepartment(){
+		List<Department> result = service.getAllDepartment();
 		
 		return ResponseEntity.ok(result);
 	}
 	
 	@GetMapping(value="/{id}")
-	public ResponseEntity<?> findById(@PathVariable Long id){
+	public ResponseEntity<?> getDepartmentById(@PathVariable Long id){
 		//Department result = service.findById(id);
 		//service.findById(id);
 		
 //		return result;
-		return service.findById(id);
+		return service.getDepartmentById(id);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Department> insertDepartment(@RequestBody Department department) {
-		Department criadoDepartment = service.insertDepartment(department);
-		
+	public @ResponseBody ResponseEntity<?> createDepartment(@RequestBody Department department){
+			service.createDepartment(department);
+			return ResponseEntity.ok().body(department);
+
+			//return ResponseEntity.ok("Departamento criado com sucesso");
+			
+/*		} catch (BadRequestException e) {
+			// TODO: handle exception
+			RestErrorMessage badRequest = new RestErrorMessage();
+			
+			badRequest.setTimestamp(Instant.now());
+			badRequest.setStatus(HttpStatus.BAD_REQUEST.value());
+			badRequest.setError(HttpStatus.BAD_REQUEST);
+			badRequest.setMessage(e.getMessage());
+			badRequest.setPath("path");
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(badRequest);
+		}
+*/		
 	    // Retorna o recurso criado com um código de status 201 (criado) 
-	    return ResponseEntity 
-	            .status(HttpStatus.CREATED) 
-	            .body(criadoDepartment); 
-		
-		//service.insertDepartment(department);
+	    //return ResponseEntity 
+		//            .status(HttpStatus.CREATED) 
+		//            .body(criadoDepartment); 
 	}
 
 	@PutMapping
-	public @ResponseBody ResponseEntity<?> updateDepartment(@RequestBody Department department) throws Exception {
-		return service.updateDepartment(department);
+	public @ResponseBody ResponseEntity<String> updateDepartment(@RequestBody Department department){
+		service.updateDepartment(department);
+		return ResponseEntity.ok("Departamento alterado com sucesso");
 	}
 
 	@PutMapping(value="/{id}")
-	public ResponseEntity<?> updateDepartmentId(@RequestBody Department department, @PathVariable Long id) {
-		//Department dep = service.findById(id);
-		//ResponseEntity<?> dep = service.findById(id);
-		
-		//dep.setName(department.getName());
-		
+	public @ResponseBody ResponseEntity<String> updateDepartmentId(@RequestBody Department department, @PathVariable Long id) {
 		service.updateDepartmentId(department, id);
 		
 		return ResponseEntity.ok("Departamento alterado com sucesso. ");

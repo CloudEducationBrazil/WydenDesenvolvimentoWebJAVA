@@ -8,68 +8,46 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.uniruy.userdept.entities.Department;
-import com.uniruy.userdept.exceptions.ResourceNotFoundException;
+import com.uniruy.userdept.exceptions.EntityNotFoundException;
 import com.uniruy.userdept.repositories.DepartmentRepository;
 
 @Service
 public class DepartmentService {
+
 	@Autowired
 	DepartmentRepository repository;
 
-	public List<Department> findAll(){
+	public List<Department> getAllDepartment(){
 		List<Department> result = repository.findAll();
-		
 		return result;
 	}
 	
-	public ResponseEntity<?> findById(Long id){ // Department
-		try {
-			Department dep = repository.findById(id).orElseThrow();
-			
-			//return result;
-			return new ResponseEntity<>(dep, HttpStatus.OK);
-
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Departamento não encontrado ...");
-		}
+	public ResponseEntity<?> getDepartmentById(Long id){ // Department
+		//Department dep = repository.findById(id).orElseThrow(EventNotFoundException::new);
+		Department dep = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Departamento não encontrado: "+id));
+		return new ResponseEntity<>(dep, HttpStatus.OK);
 	}
 	
-	public Department insertDepartment(Department department) {
-		return repository.save(department);
+	public void createDepartment(Department department) {
+		repository.save(department);
 	}
 
-	public ResponseEntity<?> updateDepartment(Department department) {
-		try {
-			Department dep = repository.findById(department.getId()).orElseThrow();
+	public void updateDepartment(Department department) {
+			Department dep = repository.findById(department.getId()).orElseThrow(() -> new EntityNotFoundException("Departamento não encontrado: "+department.getId()));
 
-			//System.out.println("Mensagem: " + dep.getId());
 			if (dep != null) {
 				dep.setName(department.getName());
 				repository.save(dep);
-
-				return new ResponseEntity<>(dep, HttpStatus.OK);
 			}
-			else {
-				return ResponseEntity.badRequest().body("Não foi possível alterar o Departamento ...");
-			}
-		} 
-		catch (Exception e) {
-			return ResponseEntity.badRequest().body("Departamento não foi encontrado ...");
-		}
 	}
 
-	// vídeo tratamento de exceção: https://youtu.be/GmbK-O3v3Gg
-	// https://youtu.be/ac7JWdD3CZ0
-	public ResponseEntity<?> updateDepartmentId(Department department, Long id) {
-		Department dep = repository.findById(id).get();
-		
-		if (dep == null) {
-			throw new ResourceNotFoundException("Department not exist ...");
-		}
+	// vídeo tratamento de exceção: https://youtu.be/GmbK-O3v3Gg; https://youtu.be/ac7JWdD3CZ0
+	public void updateDepartmentId(Department department, Long id) {
+		Department dep = repository.findById(id).orElseThrow(EntityNotFoundException::new);
 		
 		dep.setName(department.getName());
-		
-		//repository.save(dep);
-		return new ResponseEntity<>(dep, HttpStatus.OK);
+		repository.save(dep);
+
+		//return new ResponseEntity<>(dep, HttpStatus.OK);
 	}
 }
