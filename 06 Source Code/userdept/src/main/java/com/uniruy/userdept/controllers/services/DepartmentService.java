@@ -28,6 +28,16 @@ public class DepartmentService {
 		return new ResponseEntity<>(dep, HttpStatus.OK);
 	}
 	
+	public ResponseEntity<?> getDepartmentByName(String name2) { // Department
+		Department dep = repository.buscarPorName(name2);
+		
+		if ( dep == null ) {
+			return new ResponseEntity<>("Departamento não encontrado: "+name2, HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<>(dep, HttpStatus.OK);
+	}
+	
 	public void createDepartment(Department department) {
 		repository.save(department);
 	}

@@ -33,11 +33,12 @@ public class DepartmentController<JSONObject> {
 	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<?> getDepartmentById(@PathVariable Long id){
-		//Department result = service.findById(id);
-		//service.findById(id);
-		
-//		return result;
 		return service.getDepartmentById(id);
+	}
+	
+	@GetMapping(value="/name/{name2}")
+	public ResponseEntity<?> getDepartmentByName(@PathVariable String name2){
+		return service.getDepartmentByName(name2);
 	}
 	
 	@PostMapping
