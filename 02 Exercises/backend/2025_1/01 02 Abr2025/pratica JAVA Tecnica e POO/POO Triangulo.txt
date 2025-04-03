@@ -22,7 +22,7 @@ Polimorfismo
 
 Exemplos:
 
-Entidades: Produto; Cliente; Triangulo
+Entidades: Produto; Cliente; Triangulo; Pessoa
 Serviços: ProdutoService; ClienteService; EmailService; StorageService
 Controladores: ProdutoController; ClienteController
 Utilitários: Calculadora; Compactador

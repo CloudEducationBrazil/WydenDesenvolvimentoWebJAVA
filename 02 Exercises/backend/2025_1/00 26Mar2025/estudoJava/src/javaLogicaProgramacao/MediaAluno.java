@@ -1,4 +1,4 @@
-package estudoJava;
+package javaLogicaProgramacao;
 
 import java.util.Scanner;
 

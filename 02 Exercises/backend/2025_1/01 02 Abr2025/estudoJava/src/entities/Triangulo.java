@@ -1,20 +1,28 @@
 package entities;
 
 public class Triangulo {
-	private int a;
-	private int b;
-	private int c;
+	private Integer a;
+	private Integer b;
+	private Integer c;
 	
-	public int somar(int a, int b) {
+	public Triangulo() {}
+	
+	public double Area() {
+		float p = (float) (a + b + c) / 2;
+		
+		return Math.sqrt(p*(p-a)*(p-b)*(p-c));
+	}
+	
+	public int somar(Integer a, Integer b) {
 		return a + b;
 	}
 
-	public int somar(int b, float c) {
-		return b + (int) this.c;
+	public int somar(Integer b, Float c) {
+		return b + c.intValue();
 	}
 
 	public int somar(float a, float c) {
-		return (int) this.a + (int) this.c;
+		return (int) a + (int) c;
 	}
 
 	public int somar(int a, int b, int c) {
@@ -47,6 +55,6 @@ public class Triangulo {
 
 	@Override
 	public String toString() {
-		return "Soma: [a=" + a + ", b=" + b + "]";
+		return "Soma: [a=" + a + ", b=" + b + ", c=" + c + "]";
 	}
 }
