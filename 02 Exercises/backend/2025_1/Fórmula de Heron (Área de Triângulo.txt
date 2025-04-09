@@ -1,0 +1,30 @@
+Fórmula de Heron (Área de Triângulo)
+
+area = raiz[p(p-a)(p-b)(p-c)] onde p = (a + b + c ) / 2; a, b, e c, são os lados dos triângulos. 
+
+t1 => a=3;    b=4;    c=5;       area=6
+t2 => a=7.5; b=4.5; c=4.02; area=7.5638
+
+calcular área de 2 triângulos e qual a maior área?
+
+Classe: É um tipo estruturado que pode conter membros:
+- atributos(dados/campos)
+- métodos(funções/operações)
+
+A Classe também pode prover muitos outros recursos, tais como:
+
+Construtores
+Sobrecarga
+Encapsulamento
+Herança
+Polimorfismo
+
+Exemplos:
+
+Entidades: Produto; Cliente; Triangulo
+Serviços: ProdutoService; ClienteService; EmailService; StorageService
+Controladores: ProdutoController; ClienteController
+Utilitários: Calculadora; Compactador
+Outros: Views; repositórios; gerenciadores, etc
+
+
