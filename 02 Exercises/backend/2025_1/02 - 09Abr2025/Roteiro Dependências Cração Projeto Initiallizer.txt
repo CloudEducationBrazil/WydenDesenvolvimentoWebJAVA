@@ -1,0 +1,25 @@
+Dependências:
+
+Spring Web
+Spring Data JPA
+H2 Database
+PostgreSQL Driver
+
+Dados Projeto Web:
+
+Project: Maven
+Language: Java
+Sprint Boot: Default
+
+Project Metadata:
+Group: com.uniruy
+Artefact/Name: listgames
+Description: Projeto Games
+Package Name: com.uniruy.listgames
+
+Packaging Jar
+Java: 17 ou 21 (LTS)
+
+CTRL + Generate
+
+Nota: Criar Projeto / lib Maven

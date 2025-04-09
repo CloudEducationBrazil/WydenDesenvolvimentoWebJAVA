@@ -1,0 +1,17 @@
+@Entity
+@Table(name = "tb_game")
+public class XXX implements Serializable {
+private static final long serialVersionUID = 1L;
+
+Ex.Pk
+@Id
+@GeneratedValue (strategy = GenerationType.IDENTITY)
+private Long id;
+
+Ex. renomear coluna
+@Column(name="game_year")
+private Integer year;
+
+Ex.: Tipo Text
+@Column(columnDefinition = "TEXT")
+private String shortDescription;
