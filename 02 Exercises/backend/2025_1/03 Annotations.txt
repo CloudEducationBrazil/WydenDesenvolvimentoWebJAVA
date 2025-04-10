@@ -1,17 +1,18 @@
+- Para associar com a Entidade/Tabela do BD
 @Entity
 @Table(name = "tb_game")
 public class XXX implements Serializable {
 private static final long serialVersionUID = 1L;
 
-Ex.Pk
+- Para criação de PK (chave primária)
 @Id
 @GeneratedValue (strategy = GenerationType.IDENTITY)
 private Long id;
 
-Ex. renomear coluna
+- Para renomear o atributo da casse para compatível com o BD
 @Column(name="game_year")
 private Integer year;
 
-Ex.: Tipo Text
+- Para redefinir o Tipo do campo para TEXT no BD
 @Column(columnDefinition = "TEXT")
 private String shortDescription;

@@ -1,0 +1,4 @@
+spring.application.name=listgames
+server.port=8182
+
+cors.origins=${CORS_ORIGINS:http://localhost:5173,http://localhost:3000}
