@@ -1,0 +1,16 @@
+-- Criar a Camada Controllers API REST - por recurso
+@RestController
+@RequestMapping(value = "/games")
+public class GameController {
+
+-- Componente  injeção de dependência      
+@Autowired
+public GameRepository gameRepository;
+	
+-- endpoint Método Get - Consultar
+@GetMapping
+public List<Game> getAllGame(){
+   return gameRepository.findAll();
+}
+
+...
