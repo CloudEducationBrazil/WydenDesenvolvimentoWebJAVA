@@ -1,0 +1,3 @@
+-- Criar class - ResponseMessage
+
+Atributo: message do tipo string

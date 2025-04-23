@@ -1,4 +1,0 @@
--- Criar Camada Repositories por recurso
-
-@Repository
-public interface GameRepository extends JpaRepository<Objeto, ID> { }

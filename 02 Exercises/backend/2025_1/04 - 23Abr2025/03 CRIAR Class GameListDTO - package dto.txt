@@ -1,0 +1,8 @@
+-- Criar class - GameListDTO
+
+Atributos: GameListDTO = Todos da class GameList
+
+public GameListDTO(Game entity) {
+	id = entity.getId();
+	name = entity.getName();
+}

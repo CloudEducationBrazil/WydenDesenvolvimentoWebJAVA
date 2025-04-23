@@ -1,0 +1,7 @@
+-- Criar class - GameDTO
+
+Atributos: GameDTO = Todos da class Game
+
+public GameDTO(Game entity) {
+		BeanUtils.copyProperties(entity, this);
+}
