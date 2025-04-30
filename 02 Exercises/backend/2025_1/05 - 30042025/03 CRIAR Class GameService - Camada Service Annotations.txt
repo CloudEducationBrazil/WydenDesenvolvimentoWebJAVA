@@ -1,0 +1,14 @@
+-- Criar class - Camada Service
+@Service
+public class GameService {
+
+	// Injeção de dependência do Componente Repository
+	@Autowired
+	public GameRepository  gameRepository;
+	
+	// Função Consultar Todos - protocolo HTTP: Método Get
+	// Função Consultar por id - protocolo HTTP: Método Get
+	// Função Cadastrar - protocolo HTTP: Método Post
+	// Função Alterar - protocolo HTTP: Método Put
+	// Função Excluir - protocolo HTTP: Método Delete
+}
