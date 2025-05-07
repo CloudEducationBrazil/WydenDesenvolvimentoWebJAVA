@@ -1,5 +1,6 @@
 Passos:  
 
+0. No arquivo application.properties alterar de ${APP_PROFILE:test} para ${APP_PROFILE:dev}
 
 1.No arquivo application-dev.properties DESCOMENTAR as 4 primeiras linhas 
 
@@ -11,4 +12,4 @@ Passos:
 
 4.Criar o BD PostgreSQL games;
 
-5.Entrar no BD games e rodar o scripts CREATE.SQL gerado.
+5.Entrar no BD games e rodar o script CREATE.SQL gerado.
