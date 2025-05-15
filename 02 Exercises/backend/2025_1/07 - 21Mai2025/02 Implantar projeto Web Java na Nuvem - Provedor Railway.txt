@@ -1,0 +1,15 @@
+Passos:  
+
+	0. No arquivo application.properties alterar de ${APP_PROFILE:dev} para ${APP_PROFILE:prod};
+
+	1 Criar Conta e Logar no provedor Railway;
+
+	2. Criar um SERVIÇO, BD PostgreSQL;
+
+	3. Criar e Configurar variáveis de ambiente no provedor Railway:  DB_URL; DB_USERNAME; DB_PASSWORD;
+
+	4. Criar um SERVIÇO, APP Web, no provedor Railway integrando com o projeto Web listgames do repositório GitHub;
+
+            Nota: Verificar se o deploy foi realizado com sucesso. 
+
+	5. Deploy OK, testar os endpoints no Postman.

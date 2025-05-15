@@ -1,0 +1,1 @@
+Alterar APP_PROFILE:dev para APP_PROFILE:prod

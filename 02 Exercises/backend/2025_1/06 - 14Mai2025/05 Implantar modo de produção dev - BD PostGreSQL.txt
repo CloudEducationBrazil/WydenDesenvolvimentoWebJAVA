@@ -1,15 +1,15 @@
 Passos:  
 
-0. No arquivo application.properties alterar de ${APP_PROFILE:test} para ${APP_PROFILE:dev}
+	0. No arquivo application.properties alterar de ${APP_PROFILE:test} para ${APP_PROFILE:dev}
 
-1.No arquivo application-dev.properties DESCOMENTAR as 4 primeiras linhas 
+	1.No arquivo application-dev.properties DESCOMENTAR as 4 primeiras linhas 
 
-2.Executar o projeto web
+	2.Executar o projeto web
 
-	Nota: Será gerado um arquivo na RAIZ do projeto CREATE.SQL.
+		Nota: Será gerado um arquivo na RAIZ do projeto CREATE.SQL.
 
-3.No arquivo application-dev.properties COMENTAR as 4 primeiras linhas;
+	3.No arquivo application-dev.properties COMENTAR as 4 primeiras linhas;
 
-4.Criar o BD PostgreSQL games;
+	4.Criar o BD PostgreSQL gamedb;
 
-5.Entrar no BD games e rodar o script CREATE.SQL gerado.
+	5.Entrar no BD gamedb e rodar o script CREATE.SQL gerado.
