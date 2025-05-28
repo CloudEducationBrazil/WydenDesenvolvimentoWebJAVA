@@ -1,0 +1,30 @@
+-- Vídeo
+https://youtu.be/GmbK-O3v3Gg
+https://youtu.be/MAv7xgnSD-s
+https://youtu.be/2o7LJLTIgdE
+
+-- Links úteis
+https://www.dio.me/articles/entendendo-o-bloco-try-catch-em-java
+https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
+https://www.w3schools.com/java/java_try_catch.asp
+https://www.devmedia.com.br/blocos-try-catch/7339
+
+-- Exemplo com tratamento de erro:
+
+@Service
+public class MyService {
+
+    public String performOperation(int number) {
+        try {
+            if (number < 0) {
+                throw new IllegalArgumentException("Número não pode ser negativo.");
+            }
+            return "Operation successful: " + number;
+        } catch (IllegalArgumentException e) {
+             //Log the error
+            System.err.println("Número Inválido: " + e.getMessage());
+            return "Falha na Operação: " + e.getMessage();
+        }
+    }
+}
+

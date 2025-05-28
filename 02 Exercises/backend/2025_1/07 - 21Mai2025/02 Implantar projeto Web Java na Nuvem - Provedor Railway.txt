@@ -1,6 +1,6 @@
 Passos:  
 
-	1 Criar Conta e Logar no provedor Railway;
+	1 Criar Conta Railway com uma conta GitHub, tempo de conta mais de 90 dias, e logar no provedor Railway;
 
 	2. Criar SERVIÇO para o BD PostgreSQL;
 
@@ -15,9 +15,9 @@ Passos:
 
 	6. Criar e Configurar variáveis de ambiente no provedor Railway: APP_PROFILE; DB_URL; DB_USERNAME; DB_PASSWORD; CORS_ORIGINS
             Nota: APP_PROFILE = prod
-                      DB_URL = jdbc:postgresql://localhost:5432/gamedb
+                      DB_URL = jdbc:postgresql://Host:Porta/BD
                       DB_USERNAME=postgres
-                      DB_PASSWORD= SENHA DO BD na provedor Railway
+                      DB_PASSWORD= SENHA do BD no provedor Railway
                       CORS_ORIGINS= IP Internet - liberação do front end
 
 		     Versão do JAVA no Railway deve ser 17.
@@ -30,3 +30,5 @@ Passos:
 
 Nota:  CI - Integração do Projeto Local com o repositório GitHub
           CD - Integração do Projeto do repositório GitHub com o Provedor Cloud Railway
+
+          Crédito de $5 ou 30 dias para teste. Podendo excluir a conta e recriar para novo crédito.
