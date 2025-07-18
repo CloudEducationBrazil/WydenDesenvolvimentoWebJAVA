@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #eeeeee;
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.classH2 {
+  color: green;
+}
+
+header {
+  display: grid;
+  flex-flow: row wrap;
+  align-items: center;
+  width: 70%;
+  /* border:1px solid red;*/
+  margin: auto auto;
+}
+
+button {
+  padding: 10%;
+}
+
+main {
+  display: inline-block;
+  margin: auto auto;
+  justify-content: center;
+}
+
+footer {
+  display: flex;
+  flex-flow: row-wrap;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  background: black;
+  height: 40px;
+  width: 100%;
+}
+
+footer a {
+  color: white;
+}
+
+footer i {
+  color: red;
+  font-size: 22px;
+}
+
+.d-none {
+  display: none;
+}
+
+.d-inline {
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+}
+
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}
+.green {
+  background: green;
+}
+
+#flip,
+#panel {
+  padding: 30px;
+  width: 900px;
+  height: 100px;
+  text-align: center;
+}
+
+.mdi {
+  color: green;
+}
+
+.mdi-check-circle {
+  color: green;
+}
+
+td,
+th {
+  border: 1px solid green;
+  text-align: center;
+  padding: 8px;
+  width: 420px;
+  height: 60px;
+}
+
+input {
+  margin-left: -53%;
+  margin-bottom: 1%;
+  margin-top: 3%;
+  padding: 8px;
+  height: 40px;
+  width: 600px;
+}

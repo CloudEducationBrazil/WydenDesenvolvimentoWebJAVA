@@ -1,0 +1,3 @@
+-- Projeto Web Java deve ser criado num repositório remoto
+
+Ex,: GitHub

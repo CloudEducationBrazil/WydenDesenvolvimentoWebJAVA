@@ -1,0 +1,48 @@
+interface FuncionarioInterface {
+  public Double getSalario();
+  public String getNome();
+}
+
+class Funcionario implements FuncionarioInterface {
+    private String mat;
+    private String nome;
+    private Double sal;
+    
+    public Funcionario (String mat, String nome, Double sal) {
+        this.mat  = mat;
+        this.nome = nome;
+        this.sal  = sal;
+    }
+    
+    public String getMat(){
+        return this.mat;
+    }
+
+    public String setMat(String mat){
+        return this.mat = mat;
+    }
+    
+    @Override
+    public String getNome() {
+        return this.nome;
+    };
+    
+    @Override
+    public Double getSalario() {
+        return this.sal;
+    };
+    
+}
+
+public class Main {
+	public static void main(String[] args) {
+      Funcionario func;
+      func = new Funcionario("321", "Heleno", 8090.00);
+
+      System.out.println(func.getMat());	    
+      System.out.println(func.setMat("764"));	  
+      
+      System.out.println(func.getNome());	    
+      System.out.println(func.getSalario());	    
+	}
+}       

@@ -1,0 +1,6 @@
+-- Criar Interface - Package projections
+
+public interface BelongingProjection {
+	Long getGameId();
+	Long getGameListId();
+}

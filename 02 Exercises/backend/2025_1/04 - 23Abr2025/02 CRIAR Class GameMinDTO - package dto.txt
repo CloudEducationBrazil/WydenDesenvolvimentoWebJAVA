@@ -1,0 +1,10 @@
+-- Criar class - GameMinDTO
+
+Atributos: GameMinDTO
+	private Long id;
+	private String title;
+	private Integer year;
+	private String imgUrl;
+	private String shortDescription;
+
+public GameMinDTO(Game entity) {

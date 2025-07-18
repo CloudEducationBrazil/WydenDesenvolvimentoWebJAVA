@@ -1,0 +1,43 @@
+- Criar as classes do modelo: Game; GameList; Belonging
+
+- Ex.: Para associar com a Entidade/Tabela do BD
+@Entity
+@Table(name = "tb_game")
+
+- Para criação de PK (chave primária)
+@Id
+@GeneratedValue (strategy = GenerationType.IDENTITY)
+
+- Para renomear o atributo da casse para compatível com o BD
+@Column(name="game_year")
+private Integer year;
+
+- Para redefinir o Tipo do campo para TEXT no BD
+@Column(columnDefinition = "TEXT")
+private String shortDescription;
+
+- Chave Composta PK na classe Mãe
+@EmbeddedId
+	private BelongingPK id = new BelongingPK();
+
+- Chave Composta PK na classe auxiliar
+@Embeddable
+public class BelongingPK {
+	@ManyToOne
+	@JoinColumn(name = "game_id")
+	private Game idGame;
+
+-- API REST - por recurso
+@RestController
+@RequestMapping(value = "/games")
+public class GameController {
+
+-- Componente  injeção de dependência      
+@Autowired
+public GameRepository gameRepository;
+	
+-- endpoint Método Get - Consultar
+@GetMapping
+public List<Game> getAllGame(){
+   return gameRepository.findAll();
+}

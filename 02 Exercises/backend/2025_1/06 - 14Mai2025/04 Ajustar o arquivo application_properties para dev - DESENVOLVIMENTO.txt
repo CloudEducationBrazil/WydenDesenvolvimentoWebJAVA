@@ -1,0 +1,1 @@
+Alterar APP_PROFILE:test para APP_PROFILE:dev

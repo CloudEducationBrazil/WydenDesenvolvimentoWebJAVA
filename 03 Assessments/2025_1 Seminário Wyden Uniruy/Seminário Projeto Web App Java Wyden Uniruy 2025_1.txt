@@ -1,0 +1,14 @@
+https://github.com/ArthurM0tta/Trabalho-Java - doceria
+https://github.com/wallacemt/backend-devbank - devbank
+https://github.com/oLuizBarbosa/ProjetoWyden - Registro de Ocorrências - Lismar
+https://github.com/almeidaprog/projetoJavaREAL - Fichas RPG
+https://github.com/JoseViniss/ProjetoPDV - PDV Food
+https://gitlab.com/wyden-projetos/java-poo-project - Gerenciador de Telefonia
+https://github.com/lucasrangelrl/agenda-de-compromissos - Agenda de Compromissos
+	https://github.com/GabrielSalazar29/projectJava
+	https://github.com/GabrielSalazar29/frontAgenda
+https://github.com/lealhenriq/Sistema-Gestao-De-Consorcios - Gestão de Consórcios
+
+-- Falta Apresentação dia 18/06
+Diogo - https://github.com/DigoDuck/petshop-api-java - Petshop
+Breno Chagas ??? não tem nada no github

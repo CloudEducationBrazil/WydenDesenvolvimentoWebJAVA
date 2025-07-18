@@ -1,0 +1,25 @@
+-- Criar class - Camada Controllers API REST - por recurso
+@RestController
+@RequestMapping(value = "/games")
+public class GameController {
+
+	// Injeção de dependência de Componente
+	@Autowired
+	public GameRepository  gameRepository;
+	
+	// Endpoint Consultar Todos - protocolo HTTP: Método Get
+	@GetMapping
+
+	// Endpoint Consultar por id - protocolo HTTP: Método Get
+	@GetMapping(value = "/{id}")
+	
+	// Endpoint Cadastrar - protocolo HTTP: Método Post
+	@PostMapping
+
+	// Endpoint Alterar - protocolo HTTP: Método Put
+	@PutMapping(value = "/{id}")
+
+	// Endpoint Excluir - protocolo HTTP: Método Delete
+	@DeleteMapping(value = "/{id}")
+
+}

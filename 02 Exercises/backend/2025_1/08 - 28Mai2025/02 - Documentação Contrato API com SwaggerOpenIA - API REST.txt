@@ -1,0 +1,21 @@
+-- Publicação provedor railway
+    https://youtu.be/wHk-b9N6Xig
+
+-- Adicionar no arquivo pom.xml
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.0.2</version>
+		</dependency>
+
+Nota: Atualizar o projeto com o MAVEN Update Project
+
+-- Gerar o contrato da API
+1. Local
+    http://localhost:8182/swagger-ui/index.html
+
+2. Web
+   https://listgames-production.up.railway.app/swagger-ui/index.html
+
+-- Testar app no bash do Windows
+   curl https://listgames-production.up.railway.app/

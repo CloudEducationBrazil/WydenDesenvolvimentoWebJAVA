@@ -1,0 +1,10 @@
+Inicio Algoritmo
+  declare n1, n2, med : numero
+
+  escreva("Digite num 1:"); leia(n1)
+  escreva("Digite num 2:"); leia(n2)
+
+  med = (n1 + n2) / 2
+
+  escreva("Média:", med)
+Fim Algoritmo

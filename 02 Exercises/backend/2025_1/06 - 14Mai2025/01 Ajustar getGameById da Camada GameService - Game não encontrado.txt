@@ -1,0 +1,15 @@
+	public ResponseEntity<?> getGameById(Long id){
+		Optional<Game> gameOptional = gameRepository.findById(id);
+		
+		if ( !gameOptional.isPresent() ) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseMessage("Game não encontrado"));
+		}
+		
+		GameDTO dto = new GameDTO(gameOptional.get());
+		
+		return ResponseEntity.status(HttpStatus.OK).body(dto);
+	}
+	
+		GameDTO dto = new GameDTO(gameOptional.get());
+		
+		return ResponseEntity.status(HttpStatus.OK).body(dto);

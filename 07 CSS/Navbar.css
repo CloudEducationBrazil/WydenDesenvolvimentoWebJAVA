@@ -1,0 +1,29 @@
+header {
+    display: flex;
+    background-color: var(--color-primary);
+    height: 60px;
+    align-items: center;
+}
+
+.dsfilme-nav-content {
+    display : flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+.dsfilme-nav-content h1 {
+    margin: 0;
+    font-weight: 700; /* negrito */ 
+    font-size: 24px;
+}
+
+.dsfilme-contact-container{
+    display: flex;
+    align-items: center;
+}
+
+.dsfilme-contact-link {
+    margin: 0 0 0 10px;
+    font-size: 12px;
+}
