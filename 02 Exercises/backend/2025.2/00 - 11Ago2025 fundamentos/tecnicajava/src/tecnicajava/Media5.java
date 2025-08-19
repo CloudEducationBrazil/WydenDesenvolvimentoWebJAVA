@@ -1,6 +1,8 @@
+package tecnicajava;
+
 import java.util.Scanner;
 
-public class Main
+public class Media5
 {
 	public static void main(String[] args) {
 	    Scanner ler = new Scanner(System.in);
@@ -12,15 +14,9 @@ public class Main
 		int b = ler.nextInt();
 		
 		float media = (a + b) / 2F;
-
-		if (media >= 6) {
-		  System.out.println("Aprovado: " + media);
-		  
-		  for (int i = 1; i <= 10; i++)
-		    System.out.println("Parabéns: " + i);
-		}
-		else {
-		  System.out.print("Reprovado: " + media);
-		}
+		
+		System.out.print("Resultado: " + media);
+		
+		ler.close();
 	}
 }

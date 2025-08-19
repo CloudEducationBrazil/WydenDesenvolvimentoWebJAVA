@@ -1,4 +1,6 @@
-public class Main
+package tecnicajava;
+
+public class ImpressaoAtribuicaoNumeroAeB3
 {
 	public static void main(String[] args) {
 		int a = 5;

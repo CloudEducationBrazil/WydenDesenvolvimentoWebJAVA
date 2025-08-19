@@ -1,6 +1,8 @@
+package tecnicajava;
+
 import java.util.Scanner;
 
-public class Main
+public class MediaCondicional6
 {
 	public static void main(String[] args) {
 	    Scanner ler = new Scanner(System.in);
@@ -12,7 +14,12 @@ public class Main
 		int b = ler.nextInt();
 		
 		float media = (a + b) / 2F;
+
+		if (media >= 6)
+		  System.out.print("Aprovado: " + media);
+		else
+		  System.out.print("Reprovado: " + media);
 		
-		System.out.print("Resultado: " + media);
+		ler.close();
 	}
 }

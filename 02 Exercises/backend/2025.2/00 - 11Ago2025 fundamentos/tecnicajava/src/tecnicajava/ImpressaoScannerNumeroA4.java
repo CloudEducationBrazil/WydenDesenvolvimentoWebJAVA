@@ -1,6 +1,8 @@
+package tecnicajava;
+
 import java.util.Scanner;
 
-public class Main
+public class ImpressaoScannerNumeroA4
 {
 	public static void main(String[] args) {
 	    Scanner ler = new Scanner(System.in);
@@ -9,5 +11,7 @@ public class Main
 		int a = ler.nextInt();
 
 		System.out.print("Número: " + a);
+		
+		ler.close();
 	}
 }
