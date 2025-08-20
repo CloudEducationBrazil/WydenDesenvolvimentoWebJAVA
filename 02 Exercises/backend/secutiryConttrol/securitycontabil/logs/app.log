@@ -1,0 +1,843 @@
+2025-08-20 11:31:16 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 15572 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 11:31:16 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 11:31:27 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 11:31:27 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:31:27 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 11:31:27 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 11:31:27 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 11:31:27 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 9490 ms
+2025-08-20 11:31:29 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:31:29 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 11:31:29 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 15.843 seconds (process running for 27.123)
+2025-08-20 11:31:30 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000199","password":""}
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_04585532000199.json
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD_00000000000000, idServidor=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD, grupo=, nome=DAX OIL REFINARIA - NOVO2, criacao=2025-04-14T09:38:53.015125600, listaCNPJ=[04585532000199, 04585532000350], sistemas=[SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]]
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: [SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 11:31:34 [main] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=1189e10c74c043f1ec7f08cb99079c6a, cnpj=04585532000199, validade=2025-08-21T11:31:35.607603900, servidor=ServidorDTO [id=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD_00000000000000, idServidor=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD, grupo=, nome=DAX OIL REFINARIA - NOVO2, criacao=2025-04-14T09:38:53.015125600, listaCNPJ=[04585532000199, 04585532000350], sistemas=[SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]], assinatura=61ae5a692091dee49652ab964628ef87]
+2025-08-20 11:31:37 [http-nio-8585-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-20 11:31:37 [http-nio-8585-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-20 11:31:37 [http-nio-8585-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+2025-08-20 11:31:37 [http-nio-8585-exec-1] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000155","password":""}
+2025-08-20 11:31:37 [http-nio-8585-exec-1] ERROR c.c.s.services.TokenService - >>> Erro ao chamar API externa ou ao desserializar resposta JSON
+com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.time.LocalDateTime` from String "2025-08-20T11:31:39.2230288-03:00": Failed to deserialize java.time.LocalDateTime: (java.time.format.DateTimeParseException) Text '2025-08-20T11:31:39.2230288-03:00' could not be parsed, unparsed text found at index 27
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 174] (through reference chain: com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO["servidor"]->com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO$ServidorDTO["criacao"])
+	at com.fasterxml.jackson.databind.exc.InvalidFormatException.from(InvalidFormatException.java:67)
+	at com.fasterxml.jackson.databind.DeserializationContext.weirdStringException(DeserializationContext.java:1986)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleWeirdStringValue(DeserializationContext.java:1272)
+	at com.fasterxml.jackson.datatype.jsr310.deser.JSR310DeserializerBase._handleDateTimeException(JSR310DeserializerBase.java:176)
+	at com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer._fromString(LocalDateTimeDeserializer.java:257)
+	at com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer.deserialize(LocalDateTimeDeserializer.java:154)
+	at com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer.deserialize(LocalDateTimeDeserializer.java:44)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:302)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:169)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:302)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:169)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4971)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3887)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3855)
+	at com.conttroller.securitycontabil.services.TokenService.postTokenContabilidade(TokenService.java:50)
+	at com.conttroller.securitycontabil.controllers.TokenController.postTokenContabilidade(TokenController.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.time.format.DateTimeParseException: Text '2025-08-20T11:31:39.2230288-03:00' could not be parsed, unparsed text found at index 27
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2111)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:2010)
+	at java.base/java.time.LocalDateTime.parse(LocalDateTime.java:494)
+	at com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer._fromString(LocalDateTimeDeserializer.java:255)
+	... 62 common frames omitted
+2025-08-20 11:31:44 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000155","password":""}
+2025-08-20 11:31:47 [http-nio-8585-exec-3] ERROR c.c.s.services.TokenService - >>> Erro ao chamar API externa ou ao desserializar resposta JSON
+com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.time.LocalDateTime` from String "2025-08-20T11:31:48.1627852-03:00": Failed to deserialize java.time.LocalDateTime: (java.time.format.DateTimeParseException) Text '2025-08-20T11:31:48.1627852-03:00' could not be parsed, unparsed text found at index 27
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 174] (through reference chain: com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO["servidor"]->com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO$ServidorDTO["criacao"])
+	at com.fasterxml.jackson.databind.exc.InvalidFormatException.from(InvalidFormatException.java:67)
+	at com.fasterxml.jackson.databind.DeserializationContext.weirdStringException(DeserializationContext.java:1986)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleWeirdStringValue(DeserializationContext.java:1272)
+	at com.fasterxml.jackson.datatype.jsr310.deser.JSR310DeserializerBase._handleDateTimeException(JSR310DeserializerBase.java:176)
+	at com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer._fromString(LocalDateTimeDeserializer.java:257)
+	at com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer.deserialize(LocalDateTimeDeserializer.java:154)
+	at com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer.deserialize(LocalDateTimeDeserializer.java:44)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:302)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:169)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:302)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:169)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4971)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3887)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3855)
+	at com.conttroller.securitycontabil.services.TokenService.postTokenContabilidade(TokenService.java:50)
+	at com.conttroller.securitycontabil.controllers.TokenController.postTokenContabilidade(TokenController.java:30)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1769)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1189)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.time.format.DateTimeParseException: Text '2025-08-20T11:31:48.1627852-03:00' could not be parsed, unparsed text found at index 27
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2111)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:2010)
+	at java.base/java.time.LocalDateTime.parse(LocalDateTime.java:494)
+	at com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer._fromString(LocalDateTimeDeserializer.java:255)
+	... 62 common frames omitted
+2025-08-20 11:37:56 [RMI TCP Connection(16)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-08-20 11:37:56 [RMI TCP Connection(16)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 11:37:56 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:37:56 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 11:37:56 [RMI TCP Connection(16)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:38:02 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 9628 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 11:38:02 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 11:38:03 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 11:38:03 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:38:03 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 11:38:03 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 11:38:04 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 11:38:04 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1388 ms
+2025-08-20 11:38:04 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:38:04 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 11:38:04 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 2.989 seconds (process running for 4.285)
+2025-08-20 11:38:04 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000199","password":""}
+2025-08-20 11:38:05 [main] ERROR c.c.s.services.TokenService - >>> Erro ao chamar API externa ou ao desserializar resposta JSON
+com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.time.OffsetDateTime` from String "2025-08-21T11:38:07.3178359": Failed to deserialize java.time.OffsetDateTime: (java.time.format.DateTimeParseException) Text '2025-08-21T11:38:07.3178359' could not be parsed at index 27
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 77] (through reference chain: com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO["validade"])
+	at com.fasterxml.jackson.databind.exc.InvalidFormatException.from(InvalidFormatException.java:67)
+	at com.fasterxml.jackson.databind.DeserializationContext.weirdStringException(DeserializationContext.java:1986)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleWeirdStringValue(DeserializationContext.java:1272)
+	at com.fasterxml.jackson.datatype.jsr310.deser.JSR310DeserializerBase._handleDateTimeException(JSR310DeserializerBase.java:176)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer._fromString(InstantDeserializer.java:459)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer.deserialize(InstantDeserializer.java:357)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer.deserialize(InstantDeserializer.java:56)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:302)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:169)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4971)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3887)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3855)
+	at com.conttroller.securitycontabil.services.TokenService.postTokenContabilidade(TokenService.java:50)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.run(SecuritycontabilApplication.java:24)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.main(SecuritycontabilApplication.java:18)
+Caused by: java.time.format.DateTimeParseException: Text '2025-08-21T11:38:07.3178359' could not be parsed at index 27
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2108)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1936)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer._fromString(InstantDeserializer.java:453)
+	... 31 common frames omitted
+2025-08-20 11:44:29 [RMI TCP Connection(16)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-08-20 11:44:29 [RMI TCP Connection(16)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 11:44:29 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:44:29 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 11:44:29 [RMI TCP Connection(16)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:44:36 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 16720 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 11:44:36 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 11:44:37 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 11:44:37 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:44:37 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 11:44:37 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 11:44:37 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 11:44:37 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1587 ms
+2025-08-20 11:44:38 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:44:38 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 11:44:38 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 3.162 seconds (process running for 4.506)
+2025-08-20 11:44:38 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000199","password":""}
+2025-08-20 11:44:40 [main] ERROR c.c.s.services.TokenService - >>> Erro ao chamar API externa ou ao desserializar resposta JSON
+com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.time.OffsetDateTime` from String "2025-08-21T11:44:42.4128942": Failed to deserialize java.time.OffsetDateTime: (java.time.format.DateTimeParseException) Text '2025-08-21T11:44:42.4128942' could not be parsed at index 27
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 77] (through reference chain: com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO["validade"])
+	at com.fasterxml.jackson.databind.exc.InvalidFormatException.from(InvalidFormatException.java:67)
+	at com.fasterxml.jackson.databind.DeserializationContext.weirdStringException(DeserializationContext.java:1986)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleWeirdStringValue(DeserializationContext.java:1272)
+	at com.fasterxml.jackson.datatype.jsr310.deser.JSR310DeserializerBase._handleDateTimeException(JSR310DeserializerBase.java:176)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer._fromString(InstantDeserializer.java:459)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer.deserialize(InstantDeserializer.java:357)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer.deserialize(InstantDeserializer.java:56)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:302)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:169)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4971)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3887)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3855)
+	at com.conttroller.securitycontabil.services.TokenService.postTokenContabilidade(TokenService.java:50)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.run(SecuritycontabilApplication.java:24)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.main(SecuritycontabilApplication.java:18)
+Caused by: java.time.format.DateTimeParseException: Text '2025-08-21T11:44:42.4128942' could not be parsed at index 27
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2108)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1936)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer._fromString(InstantDeserializer.java:453)
+	... 31 common frames omitted
+2025-08-20 11:50:33 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 14108 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 11:50:33 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 11:50:35 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 11:50:35 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:50:35 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 11:50:35 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 11:50:35 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 11:50:35 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2012 ms
+2025-08-20 11:50:36 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:50:36 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-08-20 11:50:36 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-08-20 11:50:36 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8585 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8585 or configure this application to listen on another port.
+
+2025-08-20 11:50:47 [RMI TCP Connection(13)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-08-20 11:50:47 [RMI TCP Connection(13)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 11:50:48 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:50:48 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 11:50:48 [RMI TCP Connection(13)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:50:53 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 1396 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 11:50:53 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 11:50:55 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 11:50:55 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:50:55 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 11:50:55 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 11:50:55 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 11:50:55 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1890 ms
+2025-08-20 11:50:56 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:50:56 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 11:50:56 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 3.655 seconds (process running for 4.895)
+2025-08-20 11:50:56 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000199","password":""}
+2025-08-20 11:50:57 [main] ERROR c.c.s.services.TokenService - >>> Erro ao chamar API externa ou ao desserializar resposta JSON
+com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.time.OffsetDateTime` from String "2025-08-21T11:50:59.0102782": Failed to deserialize java.time.OffsetDateTime: (java.time.format.DateTimeParseException) Text '2025-08-21T11:50:59.0102782' could not be parsed at index 27
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 77] (through reference chain: com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO["validade"])
+	at com.fasterxml.jackson.databind.exc.InvalidFormatException.from(InvalidFormatException.java:67)
+	at com.fasterxml.jackson.databind.DeserializationContext.weirdStringException(DeserializationContext.java:1986)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleWeirdStringValue(DeserializationContext.java:1272)
+	at com.fasterxml.jackson.datatype.jsr310.deser.JSR310DeserializerBase._handleDateTimeException(JSR310DeserializerBase.java:176)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer._fromString(InstantDeserializer.java:459)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer.deserialize(InstantDeserializer.java:357)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer.deserialize(InstantDeserializer.java:56)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:302)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:169)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4971)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3887)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3855)
+	at com.conttroller.securitycontabil.services.TokenService.postTokenContabilidade(TokenService.java:50)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.run(SecuritycontabilApplication.java:24)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.main(SecuritycontabilApplication.java:18)
+Caused by: java.time.format.DateTimeParseException: Text '2025-08-21T11:50:59.0102782' could not be parsed at index 27
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2108)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1936)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer._fromString(InstantDeserializer.java:453)
+	... 31 common frames omitted
+2025-08-20 11:51:59 [RMI TCP Connection(9)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-08-20 11:51:59 [RMI TCP Connection(9)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 11:51:59 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:51:59 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 11:51:59 [RMI TCP Connection(9)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:52:03 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 16064 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 11:52:03 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 11:52:05 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 11:52:05 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:52:05 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 11:52:05 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 11:52:05 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 11:52:05 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1455 ms
+2025-08-20 11:52:05 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:52:05 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 11:52:05 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 3.194 seconds (process running for 4.407)
+2025-08-20 11:52:05 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000199","password":""}
+2025-08-20 11:52:06 [main] ERROR c.c.s.services.TokenService - >>> Erro ao chamar API externa ou ao desserializar resposta JSON
+com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.time.OffsetDateTime` from String "2025-04-14T09:38:53.0151256": Failed to deserialize java.time.OffsetDateTime: (java.time.format.DateTimeParseException) Text '2025-04-14T09:38:53.0151256' could not be parsed at index 27
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 292] (through reference chain: com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO["servidor"]->com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO$ServidorDTO["criacao"])
+	at com.fasterxml.jackson.databind.exc.InvalidFormatException.from(InvalidFormatException.java:67)
+	at com.fasterxml.jackson.databind.DeserializationContext.weirdStringException(DeserializationContext.java:1986)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleWeirdStringValue(DeserializationContext.java:1272)
+	at com.fasterxml.jackson.datatype.jsr310.deser.JSR310DeserializerBase._handleDateTimeException(JSR310DeserializerBase.java:176)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer._fromString(InstantDeserializer.java:459)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer.deserialize(InstantDeserializer.java:357)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer.deserialize(InstantDeserializer.java:56)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:302)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:169)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:302)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:169)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4971)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3887)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3855)
+	at com.conttroller.securitycontabil.services.TokenService.postTokenContabilidade(TokenService.java:50)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.run(SecuritycontabilApplication.java:24)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.main(SecuritycontabilApplication.java:18)
+Caused by: java.time.format.DateTimeParseException: Text '2025-04-14T09:38:53.0151256' could not be parsed at index 27
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2108)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1936)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer._fromString(InstantDeserializer.java:453)
+	... 34 common frames omitted
+2025-08-20 11:56:27 [RMI TCP Connection(15)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-08-20 11:56:27 [RMI TCP Connection(15)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 11:56:27 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:56:27 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 11:56:27 [RMI TCP Connection(15)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:56:35 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 8372 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 11:56:35 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 11:56:36 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 11:56:36 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:56:36 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 11:56:36 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 11:56:36 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 11:56:36 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1572 ms
+2025-08-20 11:56:37 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 11:56:37 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 11:56:37 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 3.213 seconds (process running for 4.602)
+2025-08-20 11:56:37 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000199","password":""}
+2025-08-20 11:56:38 [main] ERROR c.c.s.services.TokenService - >>> Erro ao chamar API externa ou ao desserializar resposta JSON
+com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type `java.time.OffsetDateTime` from String "2025-04-14T09:38:53.0151256": Failed to deserialize java.time.OffsetDateTime: (java.time.format.DateTimeParseException) Text '2025-04-14T09:38:53.0151256' could not be parsed at index 27
+ at [Source: REDACTED (`StreamReadFeature.INCLUDE_SOURCE_IN_LOCATION` disabled); line: 1, column: 292] (through reference chain: com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO["servidor"]->com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO$ServidorDTO["criacao"])
+	at com.fasterxml.jackson.databind.exc.InvalidFormatException.from(InvalidFormatException.java:67)
+	at com.fasterxml.jackson.databind.DeserializationContext.weirdStringException(DeserializationContext.java:1986)
+	at com.fasterxml.jackson.databind.DeserializationContext.handleWeirdStringValue(DeserializationContext.java:1272)
+	at com.fasterxml.jackson.datatype.jsr310.deser.JSR310DeserializerBase._handleDateTimeException(JSR310DeserializerBase.java:176)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer._fromString(InstantDeserializer.java:459)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer.deserialize(InstantDeserializer.java:357)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer.deserialize(InstantDeserializer.java:56)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:302)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:169)
+	at com.fasterxml.jackson.databind.deser.impl.MethodProperty.deserializeAndSet(MethodProperty.java:129)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.vanillaDeserialize(BeanDeserializer.java:302)
+	at com.fasterxml.jackson.databind.deser.BeanDeserializer.deserialize(BeanDeserializer.java:169)
+	at com.fasterxml.jackson.databind.deser.DefaultDeserializationContext.readRootValue(DefaultDeserializationContext.java:342)
+	at com.fasterxml.jackson.databind.ObjectMapper._readMapAndClose(ObjectMapper.java:4971)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3887)
+	at com.fasterxml.jackson.databind.ObjectMapper.readValue(ObjectMapper.java:3855)
+	at com.conttroller.securitycontabil.services.TokenService.postTokenContabilidade(TokenService.java:50)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.run(SecuritycontabilApplication.java:24)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.main(SecuritycontabilApplication.java:18)
+Caused by: java.time.format.DateTimeParseException: Text '2025-04-14T09:38:53.0151256' could not be parsed at index 27
+	at java.base/java.time.format.DateTimeFormatter.parseResolved0(DateTimeFormatter.java:2108)
+	at java.base/java.time.format.DateTimeFormatter.parse(DateTimeFormatter.java:1936)
+	at com.fasterxml.jackson.datatype.jsr310.deser.InstantDeserializer._fromString(InstantDeserializer.java:453)
+	... 34 common frames omitted
+2025-08-20 12:01:42 [RMI TCP Connection(12)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-08-20 12:01:42 [RMI TCP Connection(12)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 12:01:42 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8585"]
+2025-08-20 12:01:42 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 12:01:42 [RMI TCP Connection(12)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8585"]
+2025-08-20 12:01:47 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 16532 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 12:01:47 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 12:01:48 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 12:01:48 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 12:01:48 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 12:01:48 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 12:01:48 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 12:01:48 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1486 ms
+2025-08-20 12:01:49 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 12:01:49 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 12:01:49 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 3.069 seconds (process running for 4.406)
+2025-08-20 12:01:49 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000199","password":""}
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_04585532000199.json
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD_00000000000000, idServidor=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD, grupo=, nome=DAX OIL REFINARIA - NOVO2, criacao=2025-04-14T09:38:53.015125600-03:00, listaCNPJ=[04585532000199, 04585532000350], sistemas=[SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]]
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: [SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 12:01:50 [main] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=60249455c6aa4515e679bef535028c60, cnpj=04585532000199, validade=2025-08-21T12:01:52.006225500-03:00, servidor=ServidorDTO [id=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD_00000000000000, idServidor=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD, grupo=, nome=DAX OIL REFINARIA - NOVO2, criacao=2025-04-14T09:38:53.015125600-03:00, listaCNPJ=[04585532000199, 04585532000350], sistemas=[SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]], assinatura=53a517650afb3771ae4a7e5da99a9d10]
+2025-08-20 12:02:07 [http-nio-8585-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-20 12:02:07 [http-nio-8585-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-20 12:02:07 [http-nio-8585-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-08-20 12:02:08 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000155","password":""}
+2025-08-20 12:02:08 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_04585532000155.json
+2025-08-20 12:02:08 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T12:02:10.198373100-03:00, listaCNPJ=[], sistemas=[]]
+2025-08-20 12:02:08 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: []
+2025-08-20 12:02:08 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=4572bcdd7eabf7783dfd796fc2a0eb89, cnpj=04585532000155, validade=2025-08-21T12:02:10.198366900-03:00, servidor=ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T12:02:10.198373100-03:00, listaCNPJ=[], sistemas=[]], assinatura=0fea70b4e745898f61fa257373acd441]
+2025-08-20 12:02:30 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000199","password":""}
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_04585532000199.json
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD_00000000000000, idServidor=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD, grupo=, nome=DAX OIL REFINARIA - NOVO2, criacao=2025-04-14T09:38:53.015125600-03:00, listaCNPJ=[04585532000199, 04585532000350], sistemas=[SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]]
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: [SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 12:02:31 [http-nio-8585-exec-3] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=06d03e2d9b60c3768d8e98ba46cd06df, cnpj=04585532000199, validade=2025-08-21T12:02:32.679939900-03:00, servidor=ServidorDTO [id=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD_00000000000000, idServidor=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD, grupo=, nome=DAX OIL REFINARIA - NOVO2, criacao=2025-04-14T09:38:53.015125600-03:00, listaCNPJ=[04585532000199, 04585532000350], sistemas=[SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]], assinatura=7b7f95a58794dff41bdfb2a0d60cb2f0]
+2025-08-20 12:02:41 [http-nio-8585-exec-4] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000155","password":""}
+2025-08-20 12:02:42 [http-nio-8585-exec-4] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_04585532000155.json
+2025-08-20 12:02:42 [http-nio-8585-exec-4] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T12:02:43.795523900-03:00, listaCNPJ=[], sistemas=[]]
+2025-08-20 12:02:42 [http-nio-8585-exec-4] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: []
+2025-08-20 12:02:42 [http-nio-8585-exec-4] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=83808317477eb9c0c48314897ce66818, cnpj=04585532000155, validade=2025-08-21T12:02:43.795514800-03:00, servidor=ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T12:02:43.795523900-03:00, listaCNPJ=[], sistemas=[]], assinatura=08668f81bac6c5dce41dc3682f0b5820]
+2025-08-20 12:03:11 [http-nio-8585-exec-5] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000155","password":""}
+2025-08-20 12:03:12 [http-nio-8585-exec-5] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_04585532000155.json
+2025-08-20 12:03:12 [http-nio-8585-exec-5] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T12:03:13.764918400-03:00, listaCNPJ=[], sistemas=[]]
+2025-08-20 12:03:12 [http-nio-8585-exec-5] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: []
+2025-08-20 12:03:12 [http-nio-8585-exec-5] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=747fa19fc47a50737cb45bf9e9291dc7, cnpj=04585532000155, validade=2025-08-21T12:03:13.764913500-03:00, servidor=ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T12:03:13.764918400-03:00, listaCNPJ=[], sistemas=[]], assinatura=4c215d0266931cb537cc790d73464e13]
+2025-08-20 12:03:59 [RMI TCP Connection(10)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-08-20 12:03:59 [RMI TCP Connection(10)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 12:03:59 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8585"]
+2025-08-20 12:03:59 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 12:03:59 [RMI TCP Connection(10)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8585"]
+2025-08-20 12:05:18 [main] INFO  c.c.s.SecuritycontabilApplicationTests - Starting SecuritycontabilApplicationTests using Java 21.0.6 with PID 6964 (started by heleno in D:\testejava\securitycontabil)
+2025-08-20 12:05:18 [main] INFO  c.c.s.SecuritycontabilApplicationTests - The following 1 profile is active: "test"
+2025-08-20 12:05:22 [main] INFO  c.c.s.SecuritycontabilApplicationTests - Started SecuritycontabilApplicationTests in 4.792 seconds (process running for 7.329)
+2025-08-20 12:05:22 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000199","password":""}
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_04585532000199.json
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD_00000000000000, idServidor=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD, grupo=, nome=DAX OIL REFINARIA - NOVO2, criacao=2025-04-14T09:38:53.015125600-03:00, listaCNPJ=[04585532000199, 04585532000350], sistemas=[SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]]
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: [SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> Sistema: SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> Módulo: ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> Settings do módulo: SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]
+2025-08-20 12:05:25 [main] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=a785e79c6c468a8567ca000f64a2e1d6, cnpj=04585532000199, validade=2025-08-21T12:05:26.762288300-03:00, servidor=ServidorDTO [id=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD_00000000000000, idServidor=1014-71C7-A96A-6C41-1CA2-B745-B930-1AAD, grupo=, nome=DAX OIL REFINARIA - NOVO2, criacao=2025-04-14T09:38:53.015125600-03:00, listaCNPJ=[04585532000199, 04585532000350], sistemas=[SistemaDTO [id=5, sistema=FISCAL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=5, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=6, sistema=CONTABIL, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=6, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]], SistemaDTO [id=7, sistema=FOLHA, modulos=[ModuloDTO [id=0, modulo=TODOS, status=1, listaCNPJ=[04585532000199], settings=SettingsDTO [idModulo=0, idSistema=7, qtdeUsers=1, statusFin=N, habilitado=A, observacao=]]]]]], assinatura=7749334b3c8b3bc51092a0e0d45eee77]
+2025-08-20 14:15:39 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 15428 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 14:15:39 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 14:15:41 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 14:15:41 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:15:41 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 14:15:41 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 14:15:41 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 14:15:41 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1695 ms
+2025-08-20 14:15:42 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:15:42 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 14:15:42 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 3.653 seconds (process running for 5.175)
+2025-08-20 14:15:42 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-08-20 14:15:42 [main] ERROR o.s.boot.SpringApplication - Application run failed
+java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.run(SecuritycontabilApplication.java:29)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.main(SecuritycontabilApplication.java:24)
+2025-08-20 14:15:42 [main] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 14:15:42 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 14:18:13 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 18512 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 14:18:13 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 14:18:14 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 14:18:14 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:18:14 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 14:18:14 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 14:18:14 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 14:18:14 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1476 ms
+2025-08-20 14:18:15 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:18:15 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 14:18:15 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 3.073 seconds (process running for 4.325)
+2025-08-20 14:18:15 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-08-20 14:18:15 [main] ERROR o.s.boot.SpringApplication - Application run failed
+java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.run(SecuritycontabilApplication.java:29)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.main(SecuritycontabilApplication.java:24)
+2025-08-20 14:18:15 [main] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 14:18:15 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 14:19:45 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 12776 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 14:19:45 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 14:19:47 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 14:19:47 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:19:47 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 14:19:47 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 14:19:47 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 14:19:47 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1572 ms
+2025-08-20 14:19:47 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:19:47 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 14:19:47 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 3.129 seconds (process running for 4.369)
+2025-08-20 14:19:47 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-08-20 14:19:47 [main] ERROR o.s.boot.SpringApplication - Application run failed
+java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.run(SecuritycontabilApplication.java:29)
+	at org.springframework.boot.SpringApplication.lambda$callRunner$5(SpringApplication.java:788)
+	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82)
+	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60)
+	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796)
+	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:787)
+	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184)
+	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:510)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596)
+	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+	at com.conttroller.securitycontabil.SecuritycontabilApplication.main(SecuritycontabilApplication.java:24)
+2025-08-20 14:19:47 [main] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 14:19:47 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 14:20:28 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 15736 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 14:20:28 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 14:20:29 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 14:20:29 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:20:29 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 14:20:29 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 14:20:29 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 14:20:29 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1521 ms
+2025-08-20 14:20:30 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:20:30 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 14:20:30 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 3.1 seconds (process running for 4.329)
+2025-08-20 14:20:30 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"","password":""}
+2025-08-20 14:20:32 [main] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_.json
+2025-08-20 14:20:32 [main] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:20:33.694092600-03:00, listaCNPJ=[], sistemas=[]]
+2025-08-20 14:20:32 [main] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: []
+2025-08-20 14:20:32 [main] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=513f004388b5167538001624003040b1, cnpj=, validade=2025-08-21T14:20:33.694087100-03:00, servidor=ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:20:33.694092600-03:00, listaCNPJ=[], sistemas=[]], assinatura=c19d5f24b35f090c83e925b07f673638]
+2025-08-20 14:21:55 [http-nio-8585-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-20 14:21:55 [http-nio-8585-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-20 14:21:55 [http-nio-8585-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+2025-08-20 14:21:55 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000155","password":""}
+2025-08-20 14:21:56 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_04585532000155.json
+2025-08-20 14:21:56 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:21:58.264483400-03:00, listaCNPJ=[], sistemas=[]]
+2025-08-20 14:21:56 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: []
+2025-08-20 14:21:56 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=44d0741819c0c64f083c98f7b78a0380, cnpj=04585532000155, validade=2025-08-21T14:21:58.264477600-03:00, servidor=ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:21:58.264483400-03:00, listaCNPJ=[], sistemas=[]], assinatura=4d98cc019a51df1b31f9981a2d2cd672]
+2025-08-20 14:24:19 [main] INFO  c.c.s.SecuritycontabilApplicationTests - Starting SecuritycontabilApplicationTests using Java 21.0.6 with PID 17900 (started by heleno in D:\testejava\securitycontabil)
+2025-08-20 14:24:19 [main] INFO  c.c.s.SecuritycontabilApplicationTests - The following 1 profile is active: "test"
+2025-08-20 14:24:22 [main] INFO  c.c.s.SecuritycontabilApplicationTests - Started SecuritycontabilApplicationTests in 4.254 seconds (process running for 7.117)
+2025-08-20 14:24:23 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"","password":""}
+2025-08-20 14:24:24 [main] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_.json
+2025-08-20 14:24:24 [main] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:24:26.029334900-03:00, listaCNPJ=[], sistemas=[]]
+2025-08-20 14:24:24 [main] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: []
+2025-08-20 14:24:24 [main] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=51efaff66762abadac47d0168548db6d, cnpj=, validade=2025-08-21T14:24:26.029331100-03:00, servidor=ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:24:26.029334900-03:00, listaCNPJ=[], sistemas=[]], assinatura=63eb0b6f7898ade3593c8b063647f14e]
+2025-08-20 14:27:02 [RMI TCP Connection(17)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-08-20 14:27:02 [RMI TCP Connection(17)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 14:27:02 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:27:02 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 14:27:02 [RMI TCP Connection(17)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:55:04 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 9892 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 14:55:04 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 14:55:06 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 14:55:06 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:55:06 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 14:55:06 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 14:55:06 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 14:55:06 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1556 ms
+2025-08-20 14:55:06 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:55:06 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-08-20 14:55:07 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-08-20 14:55:07 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8585 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8585 or configure this application to listen on another port.
+
+2025-08-20 14:55:23 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 11984 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 14:55:23 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 14:55:25 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 14:55:25 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:55:25 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 14:55:25 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 14:55:25 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 14:55:25 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1481 ms
+2025-08-20 14:55:25 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:55:25 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 14:55:25 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 3.096 seconds (process running for 4.486)
+2025-08-20 14:55:25 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"","password":""}
+2025-08-20 14:55:27 [main] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_.json
+2025-08-20 14:55:27 [main] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:55:29.255506200-03:00, listaCNPJ=[], sistemas=[]]
+2025-08-20 14:55:27 [main] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: []
+2025-08-20 14:55:27 [main] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=8c103121268b41259cd3041a1e40767d, cnpj=, validade=2025-08-21T14:55:29.255500800-03:00, servidor=ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:55:29.255506200-03:00, listaCNPJ=[], sistemas=[]], assinatura=6fa9c9b007120bdef3ff8ef0b8372c0d]
+2025-08-20 14:57:57 [RMI TCP Connection(13)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-08-20 14:57:57 [RMI TCP Connection(13)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 14:57:57 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:57:57 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 14:57:57 [RMI TCP Connection(13)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:58:03 [main] INFO  c.c.s.SecuritycontabilApplication - Starting SecuritycontabilApplication using Java 21.0.6 with PID 18704 (D:\testejava\securitycontabil\target\classes started by heleno in D:\testejava\securitycontabil)
+2025-08-20 14:58:03 [main] INFO  c.c.s.SecuritycontabilApplication - The following 1 profile is active: "test"
+2025-08-20 14:58:04 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8585 (http)
+2025-08-20 14:58:04 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:58:04 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-20 14:58:04 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-20 14:58:04 [main] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-20 14:58:04 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1524 ms
+2025-08-20 14:58:05 [main] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8585"]
+2025-08-20 14:58:05 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8585 (http) with context path '/'
+2025-08-20 14:58:05 [main] INFO  c.c.s.SecuritycontabilApplication - Started SecuritycontabilApplication in 3.132 seconds (process running for 4.392)
+2025-08-20 14:58:05 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"","password":""}
+2025-08-20 14:58:06 [main] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_.json
+2025-08-20 14:58:06 [main] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:58:08.190134600-03:00, listaCNPJ=[], sistemas=[]]
+2025-08-20 14:58:06 [main] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: []
+2025-08-20 14:58:06 [main] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=61147fa1d5d78c6dc804e3bdeb4c7552, cnpj=, validade=2025-08-21T14:58:08.190130700-03:00, servidor=ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:58:08.190134600-03:00, listaCNPJ=[], sistemas=[]], assinatura=e2f6492e069c2749398ee7f764db8bd6]
+2025-08-20 14:58:23 [http-nio-8585-exec-2] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-20 14:58:23 [http-nio-8585-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-20 14:58:23 [http-nio-8585-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-08-20 14:58:23 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"04585532000155","password":""}
+2025-08-20 14:58:23 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_04585532000155.json
+2025-08-20 14:58:23 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:58:25.352207300-03:00, listaCNPJ=[], sistemas=[]]
+2025-08-20 14:58:23 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: []
+2025-08-20 14:58:23 [http-nio-8585-exec-2] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=4f41ec36a9b3776e8f5c0cb57d5a4fec, cnpj=04585532000155, validade=2025-08-21T14:58:25.352197600-03:00, servidor=ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T14:58:25.352207300-03:00, listaCNPJ=[], sistemas=[]], assinatura=73fbd627d39c784dd9cb6f5907542e1b]
+2025-08-20 14:59:53 [main] INFO  c.c.s.SecuritycontabilApplicationTests - Starting SecuritycontabilApplicationTests using Java 21.0.6 with PID 12876 (started by heleno in D:\testejava\securitycontabil)
+2025-08-20 14:59:53 [main] INFO  c.c.s.SecuritycontabilApplicationTests - The following 1 profile is active: "test"
+2025-08-20 14:59:57 [main] INFO  c.c.s.SecuritycontabilApplicationTests - Started SecuritycontabilApplicationTests in 5.451 seconds (process running for 7.981)
+2025-08-20 14:59:57 [main] INFO  c.c.s.services.TokenService - >>> Enviando JSON para API externa: {"cnpj":"","password":""}
+2025-08-20 14:59:59 [main] INFO  c.c.s.services.TokenService - >>> JSON salvo com sucesso em: C:/conttrol/token_contabilidade_.json
+2025-08-20 14:59:59 [main] INFO  c.c.s.services.TokenService - >>> Servidor DTO recebido: ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T15:00:01.035810500-03:00, listaCNPJ=[], sistemas=[]]
+2025-08-20 14:59:59 [main] INFO  c.c.s.services.TokenService - >>> Lista de sistemas: []
+2025-08-20 14:59:59 [main] INFO  c.c.s.services.TokenService - >>> DTO recebido: TokenRetornoApiContabilidadeDTO [id=ae3c4a7e68a856bce8e1b7357abcdc10, cnpj=, validade=2025-08-21T15:00:01.035801400-03:00, servidor=ServidorDTO [id=, idServidor=, grupo=, nome=, criacao=2025-08-20T15:00:01.035810500-03:00, listaCNPJ=[], sistemas=[]], assinatura=2ed7b498957932cc56af649c5d8337c4]
+2025-08-20 15:23:14 [RMI TCP Connection(34)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2025-08-20 15:23:14 [RMI TCP Connection(34)-127.0.0.1] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-20 15:23:14 [tomcat-shutdown] INFO  o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8585"]
+2025-08-20 15:23:14 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-20 15:23:14 [RMI TCP Connection(34)-127.0.0.1] INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8585"]
