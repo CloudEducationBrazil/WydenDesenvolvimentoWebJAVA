@@ -1,0 +1,41 @@
+1. Classe: É um tipo estruturado que pode conter membros:
+1.1. - Atributos(dados/campos)
+1.1.1. - Encapsulamento: Níveis de Visibilidade: private, public, protected
+1.1.2. - Tipos de dados
+1.2. - Métodos (funções/operações)
+1.3. - Métodos de acesso: get e set
+1.4. - Método de exibição toString
+1.5. - Método especial CONSTRUTOR
+1.6. - this e super()
+1.7. - Métodos Estáticos
+
+public class Utils {
+	public static String nome;
+
+	public static String teste() {
+		return "Oi Estatic";
+	}
+}
+
+Nota:
+	Classe: é a definição do tipo
+	Objetos: são instâncias da classe
+
+2. A Classe também pode prover muitos outros recursos, tais como:
+
+2.1. Encapsulamento
+2.2. Construtores
+2.3. Herança: extends
+2.4. Polimorfismo: Sobrecarga e Sobreposição
+
+Exemplos:
+
+	Entidades: Produto; Cliente; Triangulo; Pessoa
+	Serviços: ProdutoService; ClienteService; EmailService; StorageService
+	Controladores: ProdutoController; ClienteController
+	Utilitários: Calculadora; Compactador
+	Outros: Views; repositórios; gerenciadores, etc
+
+Memória: 
+			Stack				Head
+			estática				dinâmica
