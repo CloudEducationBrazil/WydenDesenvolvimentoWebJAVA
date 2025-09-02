@@ -13,7 +13,7 @@ public class Utils {
 	public static String nome;
 
 	public static String teste() {
-		return "Oi Estatic";
+		return "executei um método estático.";
 	}
 }
 

@@ -9,3 +9,5 @@
 7. Polimorfismo: Overload e Override
 8. Interface: extends e implements
 9. Objetos: Instâncias da Classe
+10. Generalização e Especialização
+11. UpCasting e DownCasting
