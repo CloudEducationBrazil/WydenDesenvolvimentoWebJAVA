@@ -5,15 +5,21 @@ public class UserController {
 
 -- Componente  injeção de dependência      
 @Autowired
-public UserRepository userRepository;
+public UserService userService;
 	
 -- endpoint Método Get - Consultar
 @GetMapping
-public List<UserDTO> getAllUser(){}
+public List<UserDTO> findAllUser(){
+    List<User> result = userService.findAll();
+   return result;
+}
 
 -- endpoint Método Get por Id	
 @GetMapping(value="/{id}")
-public User getByUserId(@PathVariable Long id){}
+public User getByUserId(@PathVariable Long id){
+   User result = userService.findById(id);
+   return result;
+}
 
 -- endpoint Médodo Post - Incluir por Id	
 @PostMapping

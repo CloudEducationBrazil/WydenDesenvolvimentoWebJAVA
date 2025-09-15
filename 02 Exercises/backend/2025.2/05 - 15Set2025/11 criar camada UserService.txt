@@ -1,0 +1,37 @@
+-- Serviços - por recurso
+
+@Service
+public class UserService {
+
+-- Componente  injeção de dependência      
+@Autowired
+public UserRepository userRepository;
+	
+-- Método Get - Consultar
+@Transactional(readOnly = true)
+public List<UserDTO> findAllUser(){
+   List<User> result = userRepository.findAll();
+   return result;
+   // List<UserDTO> dto = result.stream().map(x -> new UserMinDTO(x)).toList();
+   // return dto;
+   // return result.stream().map(x -> new UserMinDTO(x)).toList();
+}
+
+-- Método Get por Id	
+@Transactional(readOnly = true)
+public User getByUserId(Long id){
+   User result = userRepository.findById(id).get();
+   return result;
+}
+
+-- Médodo Post - Incluir por Id	
+@Transactional
+public void createUser (UserDTO body) {}
+
+-- Método Alterar	
+@Transactional
+public void updateUser (Long idUser, UserDTO body) {}
+
+-- Método Deletar	
+@Transactional
+public void deleteUser (Long idUser) {}
