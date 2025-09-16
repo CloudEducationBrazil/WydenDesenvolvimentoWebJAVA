@@ -1,0 +1,3 @@
+	public UserDTO(User user) {
+		BeanUtils.copyProperties(user, this);
+	}

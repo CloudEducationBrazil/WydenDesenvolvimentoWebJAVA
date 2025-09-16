@@ -1,6 +1,5 @@
 spring.profiles.active=${APP_PROFILE:test}
 spring.jpa.open-in-view=false
-spring.application.name=listusers
 
 server.port=8085
 

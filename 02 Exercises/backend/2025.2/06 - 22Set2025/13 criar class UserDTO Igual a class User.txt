@@ -1,0 +1,13 @@
+Criar classe UserDTO:
+
+0 - Atributos
+private Long id;
+private String nome;
+private Integer idade;
+
+1 - Constructor
+Criar constructor VAZIO
+Criar constructor com parâmetros utilizando como parâmetro User user
+
+2 - Métodos de Acesso
+Criar Gets/Setters

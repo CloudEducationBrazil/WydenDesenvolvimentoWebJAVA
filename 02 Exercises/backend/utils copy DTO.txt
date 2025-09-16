@@ -1,3 +1,0 @@
-	public GameDTO(Game game) {
-		BeanUtils.copyProperties(game, this);
-	}

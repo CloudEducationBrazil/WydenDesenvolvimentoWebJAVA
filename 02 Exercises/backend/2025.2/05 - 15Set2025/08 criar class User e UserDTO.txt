@@ -1,31 +1,31 @@
-Criar classe User:
+Criar classe User e UserDTO:
 
-- Atributos
-private Long id 
-private String nome
-private Integer idade
+0 - Atributos
+private Long id;
+private String nome;
+private Integer idade;
 
-- Constructor
+1 - Constructor
 Criar constructor VAZIO
 Criar constructor com parâmetros
 
-- Métodos de Acesso
+2 - Métodos de Acesso
 Criar Gets/Setters
 
-- Método de Impressão do Objeto
+3 - Método de Impressão do Objeto
 Criar o método toString
 
-- Método de hashCode do Objeto
+4 - Método de hashCode do Objeto
 Criar o método hashCode e equals
 
-- Por fim vamos mapear, ORM, utilizando as annotations para associar com o BD
+5 - Em cima da classe User, por fim vamos mapear, ORM, utilizando as annotations para associar com o BD
 @Entities
-@TableName(name="tb_user")
+@Table(name="tb_user")
 
 Demais annotations para os atributos
-- Definir no atributo Id
+6 - Definir no atributo Id
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 
--- Alterar nome de campo
+-- Definir nome de campo
 @Column(columnDefinition = "TEXT")

@@ -1,13 +1,13 @@
 - Para associar com a Entidade/Tabela do BD
 @Entity
-@Table(name = "tb_game")
+@Table(name = "tb_user")
 
 - Para criação de PK (chave primária)
 @Id
 @GeneratedValue (strategy = GenerationType.IDENTITY)
 
 - Para renomear o atributo da casse para compatível com o BD
-@Column(name="game_year")
+@Column(name="user_year")
 private Integer year;
 
 - Para redefinir o Tipo do campo para TEXT no BD
@@ -22,41 +22,38 @@ private String shortDescription;
 @Embeddable
 public class BelongingPK {
 	@ManyToOne
-	@JoinColumn(name = "game_id")
-	private Game idGame;
+	@JoinColumn(name = "user_id")
+	private User idUser;
 
 -- API REST - por recurso
 @RestController
-@RequestMapping(value = "/games")
-public class GameController {
+@RequestMapping(value = "/users")
+public class UserController {
 
 -- Componente  injeção de dependência      
 @Autowired
-public GameRepository gameRepository;
+public UserRepository gameRepository;
 	
 -- endpoint Método Get - Consultar
 @GetMapping
-public List<GameDTO> getAllGame(){}
+public List<UserDTO> getAllUser(){}
 
 -- endpoint Método Get por Id	
 @GetMapping(value="/{id}")
-public Game getByGameId(@PathVariable Long id){}
+public User getByUserId(@PathVariable Long id){}
 
 -- endpoint Médodo Post - Incluir por Id	
 @PostMapping
-public void createGame (@RequestBody GameDTO body) {}
+public void createUser (@RequestBody UserDTO body) {}
 
 -- endpoint Método Alterar	
-@PutMapping(value = "/{idGame}/replacement")
-public void updateGame (@PathVariable Long idGame, @RequestBody GameDTO body) {}
+@PutMapping(value = "/{idUser}/replacement")
+public void updateUser (@PathVariable Long idUser, @RequestBody UserDTO body) {}
 
--- endpoint Método Deletar	
+-- endpoint Método Deletar
 @DeleteMapping(value = "/{idCategoria}")
-public void deleteGame (@PathVariable Long idCategoria) {}
+public void deleteUser (@PathVariable Long idCategoria) {}
 
 -- Camada Service
 @Transactional
 @Transactional(readOnly = true)
-
-
-
