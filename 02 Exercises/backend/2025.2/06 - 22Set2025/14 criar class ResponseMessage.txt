@@ -1,0 +1,11 @@
+Criar classe ResponseMessage:
+
+0 - Atributos
+private String message;
+
+1 - Constructor
+Criar constructor VAZIO
+Criar constructor com parâmetro
+
+2 - Métodos de Acesso
+Criar Gets/Setters
