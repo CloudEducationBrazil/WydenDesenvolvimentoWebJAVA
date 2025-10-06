@@ -1,0 +1,14 @@
+-- SpringDoc, nenhuma configuração extra é necessária. Reiniciar sua aplicação Spring Boot, a documentação já estará disponível.
+
+-- Dependência POM.XML
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.5.0</version> 
+</dependency>
+
+-- Testes endpoints
+http://localhost:8085/swagger-ui.html
+
+-- JSON Documentação do projeto App
+http://localhost:8085/v3/api-docs

@@ -1,0 +1,17 @@
+-- Criar a interface
+public interface UserMinProjection {
+		Long getId();
+		Integer getYear();
+}
+
+-- Adicionar ao repositorie
+@Repository
+public interface UserRepository extends JpaRepository<User, Long> {
+	@Query(nativeQuery = true, value = """
+			SELECT tb_user.id, tb_user.idade
+			FROM tb_user
+			WHERE tb_user.id > :Id
+			ORDER BY tb_user.idade
+				""") 
+	List<UserMinProjection> searchByIdade(Long Id);
+}
