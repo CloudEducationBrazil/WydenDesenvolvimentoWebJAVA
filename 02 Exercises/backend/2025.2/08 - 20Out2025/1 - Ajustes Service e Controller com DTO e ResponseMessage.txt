@@ -1,0 +1,5 @@
+-- Camada Controller
+ResponseEntity<?>
+
+-- Camada Service
+ResponseEntity.status(HttpStatus.???).body(new ResponseMessage(Mensagem));
