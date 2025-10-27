@@ -1,0 +1,2 @@
+https://appuserpython-production.up.railway.app/
+https://appuserstsjava-production.up.railway.app/
