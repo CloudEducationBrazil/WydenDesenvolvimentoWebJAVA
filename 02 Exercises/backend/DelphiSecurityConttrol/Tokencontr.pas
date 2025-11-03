@@ -1,0 +1,71 @@
+unit Tokencontr;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdGlobal;
+
+type
+  TForm1 = class(TForm)
+    Memo1: TMemo;
+    Button1: TButton;
+    IdTCPClient1: TIdTCPClient;
+    procedure TcpClient1Connect(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.TcpClient1Connect(Sender: TObject);
+begin
+  //Sender.
+end;
+
+procedure TForm1.Button1Click(Sender: TObject); // .EnviarComando(const Comando: string);
+var
+  linha: string;
+  Comando : PChar;
+begin
+  //IdTCPClient1.Host := '127.0.0.1';
+  IdTCPClient1.Host := PChar('192.168.0.48');
+  IdTCPClient1.Port := 8587;
+
+  try
+    IdTCPClient1.ReadTimeout := 5000;  // 5 segundos
+
+    if not IdTCPClient1.Connected then
+      IdTCPClient1.Connect;
+
+    Memo1.Lines.Clear;
+
+    // Envia o comando (GET_CONTABIL, GET_FISCAL ou GET_FOLHA)
+    Comando := 'GET_CONTABIL';
+    //ShowMessage(Comando);
+    IdTCPClient1.WriteLn(Comando);
+
+    // Lê múltiplas linhas até encontrar marcador "END"
+    repeat
+      linha := IdTCPClient1.ReadLn;
+      if linha = 'END' then Break;
+      Memo1.Lines.Add(linha);
+    until False;
+
+    IdTCPClient1.Disconnect;
+
+  except
+    on E: Exception do
+      ShowMessage('Erro: ' + E.ClassName + ' - ' + E.Message);
+  end;
+end;
+
+end.
