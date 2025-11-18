@@ -1,0 +1,8 @@
+telnet smtp.gmail.com 587
+
+Salvar o certificado gmail-cert.pem
+
+keytool -importcert -trustcacerts -file gmail-cert.pem -alias gmail -keystore "%JAVA_HOME%\lib\security\cacerts"
+senha changeit
+
+keytool -list -v -keystore "%JAVA_HOME%\lib\security\cacerts" | findstr gmail

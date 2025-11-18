@@ -1,0 +1,8 @@
+- compilar
+javac -d . InstaladorPrincipal.java
+
+- criar arq manifest.txt
+Main-Class: instalador.InstaladorPrincipal
+
+- gerar o .jar
+jar cfm LegacyInstaladorPrincipal.jar manifest.txt instalador/*.class

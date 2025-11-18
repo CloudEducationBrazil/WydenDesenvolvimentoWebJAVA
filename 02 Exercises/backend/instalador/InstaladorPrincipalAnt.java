@@ -1,8 +1,6 @@
 package instalador;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -10,10 +8,6 @@ public class InstaladorPrincipal {
 
     private static final String JAR_NAME = "securitycontabil.jar";
     private static final String SERVICE_NAME = "TokenService";
-    
-    private static final String NOME_ARQUIVO = "securityconttrol.ini";
-    private static final Path CAMINHO_ARQUIVO = Path.of(NOME_ARQUIVO);
-    private static final String SECAO = "[EMPRESA]";    
 
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_GREEN = "\u001B[32m";
@@ -28,7 +22,7 @@ public class InstaladorPrincipal {
             exibirCabecalho();
 
             if (!isAdmin()) {
-              System.out.println(ANSI_RED + "⚠️  Execute este instalador como Administrador!" + ANSI_RESET);
+                System.out.println(ANSI_RED + "⚠️  Execute este instalador como Administrador!" + ANSI_RESET);
                 return;
             }
 
@@ -37,22 +31,11 @@ public class InstaladorPrincipal {
             System.out.print("\nEscolha uma opção: ");
             String opcao = reader.readLine().trim();
 
- /*           switch (opcao) {
+            switch (opcao) {
                 case "1" -> solicitarToken(reader);
                 case "2" -> instalarServico(reader);
                 default -> System.out.println(ANSI_RED + "❌ Opção inválida!" + ANSI_RESET);
-            } */
-            
-            switch (opcao) {
-            case "1":
-                solicitarToken(reader);
-                break;
-            case "2":
-                instalarServico(reader);
-                break;
-            default:
-              System.out.println(ANSI_RED + "❌ Opção inválida!" + ANSI_RESET);
-            }           
+            }
 
         } catch (IOException e) {
             System.err.println(ANSI_RED + "Erro de entrada/saída: " + e.getMessage() + ANSI_RESET);
@@ -84,12 +67,12 @@ public class InstaladorPrincipal {
         File jarFile = new File(dir, JAR_NAME);
 
         if (!dir.exists() || !dir.isDirectory()) {
-          System.err.println(ANSI_RED + "❌ O diretório informado não existe: " + caminhoInformado + ANSI_RESET);
+            System.err.println(ANSI_RED + "❌ O diretório informado não existe: " + caminhoInformado + ANSI_RESET);
             return;
         }
 
         if (!jarFile.exists()) {
-          System.err.println(ANSI_RED + "❌ Arquivo " + JAR_NAME + " não encontrado no caminho informado." + ANSI_RESET);
+            System.err.println(ANSI_RED + "❌ Arquivo " + JAR_NAME + " não encontrado no caminho informado." + ANSI_RESET);
             return;
         }
 
@@ -100,12 +83,6 @@ public class InstaladorPrincipal {
             System.err.println("CNPJ inválido. Encerrando instalação.");
             return;
         }
-
-        // Estrutura chave-valor para gravação
-        var dadosParaGravar = Map.of("CNPJ", cnpj, "CAMINHO", caminhoInformado);
-
-        // 2. Gravar no Arquivo .ini
-        gravarConfiguracao(dadosParaGravar);        
 
         // Caminhos dinâmicos
         String javaPath = caminhoInformado + "\\java\\bin\\java.exe";
@@ -128,16 +105,9 @@ public class InstaladorPrincipal {
     private static void instalarServico(BufferedReader reader) throws IOException {
         System.out.println("\n== Instalação do Serviço ==");
 
-        // Carregar e Exibir os dados
-        var configCarregada = carregarConfiguracao();
-        
-        // Carregar valor atual do arquivo para usar como sugestão
-        String caminhoInformado = configCarregada.getOrDefault("CAMINHO", "Não Encontrado");
-        
         // Solicita caminho completo
-//        System.out.print("Digite o caminho completo onde o sistema está instalado (ex: C:\\conttroller\\conttrol): ");
-//        String caminhoInformado = reader.readLine().trim();
-        
+        System.out.print("Digite o caminho completo onde o sistema está instalado (ex: C:\\conttroller\\conttrol): ");
+        String caminhoInformado = reader.readLine().trim();
         if (caminhoInformado.isEmpty()) {
             System.err.println("Caminho inválido. Encerrando instalação.");
             return;
@@ -156,15 +126,9 @@ public class InstaladorPrincipal {
             return;
         }
 
-        // Carregar valor atual do arquivo para usar como sugestão
-        String cnpj = configCarregada.getOrDefault("CNPJ", "Não Encontrado");
-
-        System.out.print("\n");
-        
         // Solicita CNPJ
-//        System.out.print("Digite o CNPJ da empresa (somente números): ");
-//        String cnpj = reader.readLine().trim();
-        
+        System.out.print("Digite o CNPJ da empresa (somente números): ");
+        String cnpj = reader.readLine().trim();
         if (cnpj.isEmpty() || !cnpj.matches("^\\d{14}$")) {
             System.err.println("CNPJ inválido. Encerrando instalação.");
             return;
@@ -233,7 +197,7 @@ public class InstaladorPrincipal {
 
     private static void exibirCabecalho() {
         System.out.println(ANSI_YELLOW + "============================================" + ANSI_RESET);
-        System.out.println(ANSI_GREEN +  "        INSTALADOR SECURITY CONTTROL        " + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "       INSTALADOR DO SISTEMA CONTÁBIL" + ANSI_RESET);
         System.out.println(ANSI_YELLOW + "============================================\n" + ANSI_RESET);
     }
 
@@ -251,61 +215,4 @@ public class InstaladorPrincipal {
     private static String formatarCnpj(String cnpj) {
         return cnpj.replaceFirst("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})", "$1.$2.$3/$4-$5");
     }
-    /**
-     * Grava os dados em formato [SECAO]\nCHAVE=VALOR no arquivo.
-     */
-    private static void gravarConfiguracao(Map<String, String> dados) {
-        try {
-            var sb = new StringBuilder();
-            sb.append(SECAO).append("\n"); // Adiciona o cabeçalho da seção
-            
-            for (var entry : dados.entrySet()) {
-                sb.append(entry.getKey()).append("=").append(entry.getValue()).append("\n");
-            }
-            
-            // Usando o Files.writeString (Java 11) para escrita simples
-            Files.writeString(CAMINHO_ARQUIVO, sb.toString());
-            System.out.println("\n Dados salvos em: " + NOME_ARQUIVO);
-            
-        } catch (IOException e) {
-            System.err.println("Erro ao gravar o arquivo .ini: " + e.getMessage());
-        }
-    } 
-    
-    /**
-     * Carrega os dados do arquivo .ini, buscando pela seção [EMPRESA].
-     */
-    private static Map<String, String> carregarConfiguracao() {
-        var configuracao = new HashMap<String, String>();
-        
-        if (!Files.exists(CAMINHO_ARQUIVO)) {
-            System.err.println("\nArquivo de configuração não encontrado!");
-            return configuracao;
-        }
-
-        try {
-            // Usando o Files.readString (Java 11) para leitura simples
-            var conteudo = Files.readString(CAMINHO_ARQUIVO);
-            
-            // Usando o String.lines() (Java 11) e Stream para processar as linhas
-            conteudo.lines()
-                    .map(String::trim)
-                    .filter(line -> !line.isEmpty() && !line.startsWith(";"))
-                    .forEach(line -> {
-                        // O parser é simplificado: só processa chave=valor dentro da seção correta
-                        if (line.equals(SECAO)) {
-                            // Encontrou a seção, o que é útil se houvessem múltiplas seções
-                        } else if (line.contains("=")) {
-                            var partes = line.split("=", 2);
-                            if (partes.length == 2) {
-                                configuracao.put(partes[0].trim(), partes[1].trim());
-                            }
-                        }
-                    });
-
-        } catch (IOException e) {
-            System.err.println("Erro de leitura do arquivo .ini: " + e.getMessage());
-        }
-        return configuracao;
-    }   
 }

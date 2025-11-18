@@ -6,9 +6,9 @@ import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class InstaladorPrincipal {
+public class InstaladorPrincipalWin32bits {
 
-    private static final String JAR_NAME = "securitycontabil.jar";
+    private static final String JAR_NAME = "legacysecuritycontabil.jar";
     private static final String SERVICE_NAME = "TokenService";
     
     private static final String NOME_ARQUIVO = "securityconttrol.ini";
@@ -28,19 +28,19 @@ public class InstaladorPrincipal {
             exibirCabecalho();
 
             if (!isAdmin()) {
-              System.out.println(ANSI_RED + "⚠️  Execute este instalador como Administrador!" + ANSI_RESET);
+              System.out.println(ANSI_RED + "Execute este instalador como Administrador!" + ANSI_RESET);
                 return;
             }
 
             System.out.println("1 - Solicitar Token");
-            System.out.println("2 - Instalar Serviço");
-            System.out.print("\nEscolha uma opção: ");
+            System.out.println("2 - Instalar Servico");
+            System.out.print("\nEscolha uma opcao: ");
             String opcao = reader.readLine().trim();
 
  /*           switch (opcao) {
                 case "1" -> solicitarToken(reader);
                 case "2" -> instalarServico(reader);
-                default -> System.out.println(ANSI_RED + "❌ Opção inválida!" + ANSI_RESET);
+                default -> System.out.println(ANSI_RED + "Opção inválida!" + ANSI_RESET);
             } */
             
             switch (opcao) {
@@ -51,8 +51,8 @@ public class InstaladorPrincipal {
                 instalarServico(reader);
                 break;
             default:
-              System.out.println(ANSI_RED + "❌ Opção inválida!" + ANSI_RESET);
-            }           
+              System.out.println(ANSI_RED + "Opcao invalida!" + ANSI_RESET);
+        }           
 
         } catch (IOException e) {
             System.err.println(ANSI_RED + "Erro de entrada/saída: " + e.getMessage() + ANSI_RESET);
@@ -73,7 +73,7 @@ public class InstaladorPrincipal {
         System.out.println("\n== Solicitação de Token ==");
 
         // Solicita caminho completo
-        System.out.print("Digite o caminho completo onde o sistema está instalado (ex: C:\\conttroller\\conttrol): ");
+        System.out.print("Digite o caminho completo onde o sistema esta instalado (ex: C:\\conttroller\\conttrol): ");
         String caminhoInformado = reader.readLine().trim();
         if (caminhoInformado.isEmpty()) {
             System.err.println("Caminho inválido. Encerrando instalação.");
@@ -84,23 +84,23 @@ public class InstaladorPrincipal {
         File jarFile = new File(dir, JAR_NAME);
 
         if (!dir.exists() || !dir.isDirectory()) {
-          System.err.println(ANSI_RED + "❌ O diretório informado não existe: " + caminhoInformado + ANSI_RESET);
+          System.err.println(ANSI_RED + "O diretório informado nao existe: " + caminhoInformado + ANSI_RESET);
             return;
         }
 
         if (!jarFile.exists()) {
-          System.err.println(ANSI_RED + "❌ Arquivo " + JAR_NAME + " não encontrado no caminho informado." + ANSI_RESET);
+          System.err.println(ANSI_RED + "Arquivo " + JAR_NAME + " nao encontrado no caminho informado." + ANSI_RESET);
             return;
         }
 
         // Solicita CNPJ
-        System.out.print("Digite o CNPJ da empresa (somente números): ");
+        System.out.print("Digite o CNPJ da empresa (somente numeros): ");
         String cnpj = reader.readLine().trim();
         if (cnpj.isEmpty() || !cnpj.matches("^\\d{14}$")) {
             System.err.println("CNPJ inválido. Encerrando instalação.");
             return;
         }
-
+        
         // Estrutura chave-valor para gravação
         var dadosParaGravar = Map.of("CNPJ", cnpj, "CAMINHO", caminhoInformado);
 
@@ -108,11 +108,11 @@ public class InstaladorPrincipal {
         gravarConfiguracao(dadosParaGravar);        
 
         // Caminhos dinâmicos
-        String javaPath = caminhoInformado + "\\java\\bin\\java.exe";
+        String javaPath = caminhoInformado + "\\java11\\bin\\java.exe";
         String gmailAppPassword = "cofyuorxbeuxabbf";
         String logPath = caminhoInformado + "\\install.log";
 
-        System.out.println("\nExecutando geração de token...");
+        System.out.println("\nExecutando geracao de token...");
 
         executarProcesso(new String[]{
                 javaPath,
@@ -126,20 +126,23 @@ public class InstaladorPrincipal {
     }
 
     private static void instalarServico(BufferedReader reader) throws IOException {
-        System.out.println("\n== Instalação do Serviço ==");
+        System.out.println("\n== Instalacao do Servico ==");
 
         // Carregar e Exibir os dados
         var configCarregada = carregarConfiguracao();
         
         // Carregar valor atual do arquivo para usar como sugestão
         String caminhoInformado = configCarregada.getOrDefault("CAMINHO", "Não Encontrado");
-        
+
         // Solicita caminho completo
-//        System.out.print("Digite o caminho completo onde o sistema está instalado (ex: C:\\conttroller\\conttrol): ");
-//        String caminhoInformado = reader.readLine().trim();
+        //System.out.print("Caminho da Instalacao: " + caminhoInformado + "\n");
+        //String novaEntrada = reader.readLine().trim();
+
+        // Decide qual valor usar
+        //String caminhoInformado = novaEntrada.isEmpty() ? caminhoAux : novaEntrada;        
         
         if (caminhoInformado.isEmpty()) {
-            System.err.println("Caminho inválido. Encerrando instalação.");
+            System.err.println("Caminho invalido. Encerrando instalacao.");
             return;
         }
 
@@ -147,23 +150,26 @@ public class InstaladorPrincipal {
         File jarFile = new File(dir, JAR_NAME);
 
         if (!dir.exists() || !dir.isDirectory()) {
-            System.err.println(ANSI_RED + "❌ O diretório informado não existe: " + caminhoInformado + ANSI_RESET);
+            System.err.println(ANSI_RED + "O diretório informado não existe: " + caminhoInformado + ANSI_RESET);
             return;
         }
 
         if (!jarFile.exists()) {
-            System.err.println(ANSI_RED + "❌ Arquivo " + JAR_NAME + " não encontrado no caminho informado." + ANSI_RESET);
+            System.err.println(ANSI_RED + "Arquivo " + JAR_NAME + " não encontrado no caminho informado." + ANSI_RESET);
             return;
         }
 
         // Carregar valor atual do arquivo para usar como sugestão
         String cnpj = configCarregada.getOrDefault("CNPJ", "Não Encontrado");
 
+        // Solicita cnpj
+        //System.out.print("CNPJ da Empresa: " + cnpj + "\n");
+
         System.out.print("\n");
-        
-        // Solicita CNPJ
-//        System.out.print("Digite o CNPJ da empresa (somente números): ");
-//        String cnpj = reader.readLine().trim();
+        //String cnpj = reader.readLine().trim();
+
+        // Decide qual valor usar
+        //cnpj = cnpj.isEmpty() ? cnpjAux : cnpj;        
         
         if (cnpj.isEmpty() || !cnpj.matches("^\\d{14}$")) {
             System.err.println("CNPJ inválido. Encerrando instalação.");
@@ -171,14 +177,14 @@ public class InstaladorPrincipal {
         }
 
         // Solicita Token
-        System.out.print("Digite o TOKEN de autenticação: ");
+        System.out.print("Digite o TOKEN de autenticacao: ");
         String token = reader.readLine().trim();
         if (token.isEmpty() || !token.matches("^[A-Za-z0-9._-]{20,}$")) {
             System.err.println("Token inválido! Encerrando instalação.");
             return;
         }
 
-        String javaPath = caminhoInformado + "\\java\\bin\\java.exe";
+        String javaPath = caminhoInformado + "\\java11\\bin\\java.exe";
         String logPath = caminhoInformado + "\\install.log";
 
         String arch = System.getenv("PROCESSOR_ARCHITECTURE");
@@ -187,28 +193,28 @@ public class InstaladorPrincipal {
         String nssmPath = caminhoInformado + "\\nssm\\" + (is64bit ? "win64" : "win32") + "\\nssm.exe";
 
         System.out.println("Caminho do JAR: " + jarFile.getAbsolutePath());
-        System.out.println("CNPJ vinculado: " + formatarCnpj(cnpj));
+        System.out.println("CNPJ da Empresa Vinculado: " + formatarCnpj(cnpj));
 
-        System.out.print("\nConfirma instalação do serviço? (S/N): ");
+        System.out.print("\nConfirma instalacao do servico? (S/N): ");
         if (!reader.readLine().trim().equalsIgnoreCase("S")) {
             System.out.println(ANSI_YELLOW + "Instalação cancelada pelo usuário." + ANSI_RESET);
             return;
         }
 
-        executarProcesso(new String[]{nssmPath, "stop", SERVICE_NAME}, "Parando serviço existente (se houver)", logPath);
-        executarProcesso(new String[]{nssmPath, "remove", SERVICE_NAME, "confirm"}, "Removendo serviço existente", logPath);
-        executarProcesso(new String[]{nssmPath, "install", SERVICE_NAME, javaPath}, "Instalando serviço base", logPath);
+        executarProcesso(new String[]{nssmPath, "stop", SERVICE_NAME}, "Parando servico existente (se houver)", logPath);
+        executarProcesso(new String[]{nssmPath, "remove", SERVICE_NAME, "confirm"}, "Removendo servico existente", logPath);
+        executarProcesso(new String[]{nssmPath, "install", SERVICE_NAME, javaPath}, "Instalando servico base", logPath);
         executarProcesso(new String[]{nssmPath, "set", SERVICE_NAME, "AppParameters",
                 "-jar \"" + jarFile.getAbsolutePath() + "\" " + cnpj + " \"" + caminhoInformado + "\" \"" + token + "\""},
-                "Configurando parâmetros do serviço", logPath);
+                "Configurando parametros do servico", logPath);
         executarProcesso(new String[]{nssmPath, "set", SERVICE_NAME, "AppDirectory", caminhoInformado},
-                "Configurando diretório de trabalho", logPath);
+                "Configurando diretorio de trabalho", logPath);
         executarProcesso(new String[]{nssmPath, "set", SERVICE_NAME, "Start", "SERVICE_AUTO_START"},
-                "Configurando inicialização automática", logPath);
-        executarProcesso(new String[]{nssmPath, "start", SERVICE_NAME}, "Iniciando serviço", logPath);
+                "Configurando inicializacao automatica", logPath);
+        executarProcesso(new String[]{nssmPath, "start", SERVICE_NAME}, "Iniciando servico", logPath);
 
-        System.out.println(ANSI_GREEN + "\n✅ Serviço instalado e iniciado com sucesso!" + ANSI_RESET);
-        log("Serviço instalado com sucesso | Caminho: " + caminhoInformado + " | CNPJ: " + cnpj, logPath);
+        System.out.println(ANSI_GREEN + "\n✅ Servico instalado e iniciado com sucesso!" + ANSI_RESET);
+        log("Servico instalado com sucesso | Caminho: " + caminhoInformado + " | CNPJ: " + cnpj, logPath);
     }
 
     private static void executarProcesso(String[] comando, String descricao, String logPath) {
@@ -233,7 +239,7 @@ public class InstaladorPrincipal {
 
     private static void exibirCabecalho() {
         System.out.println(ANSI_YELLOW + "============================================" + ANSI_RESET);
-        System.out.println(ANSI_GREEN +  "        INSTALADOR SECURITY CONTTROL        " + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "       INSTALADOR DO SISTEMA CONTABIL" + ANSI_RESET);
         System.out.println(ANSI_YELLOW + "============================================\n" + ANSI_RESET);
     }
 
@@ -251,6 +257,7 @@ public class InstaladorPrincipal {
     private static String formatarCnpj(String cnpj) {
         return cnpj.replaceFirst("(\\d{2})(\\d{3})(\\d{3})(\\d{4})(\\d{2})", "$1.$2.$3/$4-$5");
     }
+    
     /**
      * Grava os dados em formato [SECAO]\nCHAVE=VALOR no arquivo.
      */
