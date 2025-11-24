@@ -1,0 +1,23 @@
+package com.conttroller.securitycontabil.services;
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+
+@Service
+public class TokenScheduler {
+
+    private final TokenExecutorService tokenExecutorService;
+
+    public TokenScheduler(TokenExecutorService tokenExecutorService) {
+        this.tokenExecutorService = tokenExecutorService;
+    }
+    
+    // Executa a cada 3 horas (10,800,000 ms)
+    // Executa a cada 2 min (120,000 ms)
+    // Executa a cada 10 min (600,000 ms)
+    // Executa a cada 2 minutos (120.000 ms) ou ajustar para 3h (10.800.000 ms)
+    @Scheduled(fixedDelay = 600000) // a cada 10 minutos
+    public void atualizarTokenPeriodicamente() {
+        tokenExecutorService.executarTokenReal();
+    }
+}

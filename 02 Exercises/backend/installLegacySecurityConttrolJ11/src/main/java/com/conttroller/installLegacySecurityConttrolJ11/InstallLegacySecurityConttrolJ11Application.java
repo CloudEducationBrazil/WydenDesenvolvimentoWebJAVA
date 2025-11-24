@@ -13,7 +13,7 @@ import java.util.*;
 import com.sun.jna.platform.win32.Advapi32Util;
 import com.sun.jna.platform.win32.WinReg;
 import com.sun.jna.platform.win32.Crypt32Util;
-import java.util.Base64;
+//import java.util.Base64;
 
 @SpringBootApplication
 public class InstallLegacySecurityConttrolJ11Application {
@@ -333,12 +333,16 @@ public class InstallLegacySecurityConttrolJ11Application {
             }
 
             // valor BASE64
-            String base64 = Advapi32Util.registryGetStringValue(root, REG_PATH, REG_TOKEN_NAME);
+            //String base64 = Advapi32Util.registryGetStringValue(root, REG_PATH, REG_TOKEN_NAME);
             //System.out.println("base6: " + base64);
+            
+            byte[] encrypted = Advapi32Util.registryGetBinaryValue(root, REG_PATH, REG_TOKEN_NAME);
 
             // descriptografa DPAPI
-            byte[] plain = Crypt32Util.cryptUnprotectData(Base64.getDecoder().decode(base64));
+            //byte[] plain = Crypt32Util.cryptUnprotectData(Base64.getDecoder().decode(base64));
             //System.out.println("plain: " + plain);
+            
+            byte[] plain = Crypt32Util.cryptUnprotectData(encrypted);
 
             String tokenNoRegistro = new String(plain, StandardCharsets.UTF_8);
             //System.out.println("tokenNoRegistro: " + tokenNoRegistro);

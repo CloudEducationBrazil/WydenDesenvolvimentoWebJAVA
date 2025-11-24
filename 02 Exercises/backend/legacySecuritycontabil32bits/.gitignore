@@ -1,0 +1,49 @@
+# Build
+/target/
+/out/
+
+# IDE
+/.idea/
+/*.iml
+*.ipr
+*.iws
+
+# Eclipse / STS
+/.classpath
+/.project
+/.settings/
+
+# Logs
+/logs/
+/*.log
+
+# Arquivos temporários
+*.tmp
+*.bak
+*.swp
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Dependências
+/.mvn/wrapper/maven-wrapper.jar
+/.gradle/
+/.gradle/
+
+# Secrets
+*.jks
+*.keystore
+*.p12
+*.env
+*.properties
+# Tokens e arquivos sensíveis
+token_contabilidade_*.json
+
+# H2 Database files
+/data/
+*.mv.db
+*.trace.db
+
+# Spring Boot
+spring-boot-devtools.properties
