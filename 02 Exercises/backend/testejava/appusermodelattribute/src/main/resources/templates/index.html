@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Usuário Model Attribute</title>
+</head>
+<body>
+    <h1>Olá, mundo com Spring Boot!</h1>
+    <p>Este é meu primeiro projeto web usando Spring Boot e STS.</p>
+	
+	<h1>Formulário de Cadastro Model Attribute</h1>
+	<form th:action="@{/processar}" th:object="${user}" method="post">
+	    <label>Nome:</label>
+	    <input type="text" th:field="*{nome}" required><br><br>
+	    <label>Idade:</label>
+	    <input type="number" th:field="*{idade}" required><br><br>
+	    <button type="submit">Enviar</button>
+	</form>
+</body>
+</html>

@@ -1,0 +1,156 @@
+package com.conttroller.securitycontabil.execution;
+
+import com.conttroller.securitycontabil.dto.TokenRetornoApiContabilidadeDTO;
+import com.conttroller.securitycontabil.services.TokenService;
+import com.conttroller.securitycontabil.storage.TokenStorage;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+@Component
+public class ExecutionControl {
+
+    private static final Logger logger = LoggerFactory.getLogger(ExecutionControl.class);
+    private static final String TOKEN_KEY = "nekot"; // token cru
+    private static final String JSON_KEY  = "nosj";  // snapshot do H2
+    private static final String SERVICE_KEY = "ovita"; // estado do serviço: 0 = não instalado; 1 instalado
+
+    private final TokenStorage tokenStorage;
+    private final TokenService tokenService;  // para gravar no H2
+    
+    public ExecutionControl(TokenStorage tokenStorage, TokenService tokenService) {
+        this.tokenStorage = tokenStorage;
+        this.tokenService = tokenService;
+    }
+
+    /** Retorna true se for a primeira execucao (token ainda nao existe) */
+    public boolean isFirstRun() {
+        try {
+            return tokenStorage.load(TOKEN_KEY).isEmpty();
+        } catch (IOException e) {
+            logger.error("Erro ao verificar token no registro: {}", e.getMessage(), e);
+            return true;
+        }
+    }
+    
+    /** Grava o token no registro do Windows */
+    public void saveToken(String token) {
+        try {
+            tokenStorage.save(TOKEN_KEY, token);
+        } catch (IOException e) {
+            logger.error("Erro ao salvar token no registro: {}", e.getMessage(), e);
+        }
+    }
+
+    /** Lê o token armazenado */
+    public String getStoredToken() {
+        try {
+            return tokenStorage.load(TOKEN_KEY).orElse(null);
+        } catch (IOException e) {
+            logger.error("Erro ao ler token do registro: {}", e.getMessage(), e);
+            return null;
+        }
+    }
+
+    /** Registra o token e Atualiza H2 no registro */
+    public void updateTokenFromApi(String cnpj, List<TokenRetornoApiContabilidadeDTO> apiResponses) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            String json = mapper.writeValueAsString(apiResponses); // JSON completo da API
+            
+            logger.info("apiResponses O JSON {}", apiResponses);
+            
+            // Grava todos os tokens no H2
+            for (TokenRetornoApiContabilidadeDTO dto : apiResponses) {
+                tokenService.salvarOuAtualizarToken(dto);
+            }
+
+            // Se for a primeira execução, salva o nekot
+            if (isFirstRun()) {
+                String token = apiResponses.get(0).getAssinatura();
+                tokenStorage.save(TOKEN_KEY, token);
+                logger.info("Primeira execução detectada: nekot salvo.");
+            } 
+            //else {
+            	// 22/10/75
+
+            // Sempre atualiza TokenOriginal com todo o JSON
+            tokenStorage.save("TokenOriginal", json);
+            logger.info("TokenOriginal atualizado com JSON da API.");
+
+            // TokenReduzido (opcional, pode ser assinatura ou hash)
+ //           String tokenReduzido = apiResponses.get(0).getAssinatura().substring(0, 10);
+ //           tokenStorage.save("TokenReduzido", tokenReduzido);
+ //           logger.info("TokenReduzido atualizado.");
+
+            // Snapshot H2
+            tokenStorage.save(JSON_KEY, json);
+            logger.info("Snapshot JSON (nosj) atualizado.");
+            
+            //}
+
+            // Sempre atualiza o snapshot JSON em nosj
+            // 22/10/75 String json = new ObjectMapper().writeValueAsString(apiResponses);
+            // 22/10/25 tokenStorage.save(JSON_KEY, json);
+            
+            //logger.info("Snapshot atualizado em nosj.");
+        } catch (Exception e) {
+            logger.error("Falha ao atualizar tokens: {}", e.getMessage(), e);
+        }
+    }
+    
+    /** Recupera snapshot JSON para restaurar o H2 quando offline */
+    public void restoreFromRegistry() {
+        try {
+            Optional<String> jsonOpt = tokenStorage.load(JSON_KEY);
+            if (jsonOpt.isPresent()) {
+                String json = jsonOpt.get();
+                ObjectMapper mapper = new ObjectMapper();
+
+                // Desserializa JSON apenas com os campos necessários para H2
+                List<TokenRetornoApiContabilidadeDTO> tokens =
+                    Arrays.asList(mapper.readValue(json, TokenRetornoApiContabilidadeDTO[].class));
+
+                for (TokenRetornoApiContabilidadeDTO dto : tokens) {
+                    // Chama o método que só grava os metadados no H2
+                    tokenService.salvarOuAtualizarToken(dto);
+                }
+                logger.info("H2 restaurado a partir do Registro do Windows (nosj).");
+            } else {
+                logger.warn("Nenhum snapshot encontrado em nosj para restaurar o H2.");
+            }
+        } catch (IOException e) {
+            logger.error("Erro ao restaurar H2 do registro: {}", e.getMessage(), e);
+        }
+    }
+    
+    /** Retorna true se o serviço já executou pelo menos uma vez */
+    public boolean isServiceRun() {
+        try {
+            Optional<String> stateOpt = tokenStorage.load(SERVICE_KEY);
+            logger.info("Aquiii isPresent " + stateOpt.isPresent());
+            logger.info("Aquiii equals " + "1".equals(stateOpt.get()));
+                       return stateOpt.isPresent() && "1".equals(stateOpt.get());
+        } catch (IOException e) {
+            logger.error("Erro ao verificar estado do serviço (ovita): {}", e.getMessage(), e);
+            return false;
+        }
+    }
+    
+    /** Marca no Registro do Windows que o serviço já executou */
+    public void saveService() {
+        try {
+            tokenStorage.save(SERVICE_KEY, "1");
+            logger.info("Estado do serviço (ovita) salvo como 1.");
+        } catch (IOException e) {
+            logger.error("Erro ao salvar estado do serviço (ovita): {}", e.getMessage(), e);
+        }
+    }   
+}

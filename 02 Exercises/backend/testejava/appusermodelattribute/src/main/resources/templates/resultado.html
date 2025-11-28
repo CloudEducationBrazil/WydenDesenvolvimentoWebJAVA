@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado</title>
+	<style>
+	    body {
+	        font-family: Arial, sans-serif;
+	        margin: 50px;
+	        background-color: #f7f7f7;
+	    }
+
+	    h1 {
+	        color: #333;
+	    }
+
+	    a {
+	        display: inline-block;
+	        margin-top: 20px;
+	        color: #007bff;
+	        text-decoration: none;
+	    }
+
+	    a:hover {
+	        text-decoration: underline;
+	    }
+	</style>	
+</head>
+<body>
+    <h1 th:text="${mensagem}"></h1>
+    <a href="/">Voltar</a>
+</body>
+</html>

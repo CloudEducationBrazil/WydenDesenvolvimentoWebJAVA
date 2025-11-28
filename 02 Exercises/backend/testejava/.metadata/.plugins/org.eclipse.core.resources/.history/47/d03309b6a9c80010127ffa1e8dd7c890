@@ -1,0 +1,50 @@
+spring.application.name=securitycontabil
+
+# Perfil ativo padrao
+spring.profiles.active=${APP_PROFILE:prod}
+
+# Configuracoes JPA
+# spring.jpa.open-in-view=false
+
+spring.main.banner-mode=off
+logging.level.root=OFF
+
+# Porta do servidor
+server.port=8586
+
+# Debug
+debug=false
+
+# CNPJ padrao 04585532000199 DAXOIL
+cnpj.default=${CNPJ:00000000000000} // 04585532000199
+
+# Caminhos do sistema e registro
+sistema.regPath=${REGPATH:HKEY_CURRENT_USER\\\\SOFTWARE\\\\LORTTNOC\\\\SNEKOT\\\\}
+caminho.default=${CAMINHO:D:\Conttrol}
+
+token.storage.password=${TOKEN_STORAGE_PASSWORD:Juju@2703!}
+token.api.url=https://conttroller.net/api/tokencontabilidade
+
+# Configuracoes de e-mail (SMTP Gmail)
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+
+# spring-boot-smtp 
+spring.mail.username=helenocardosofilho@gmail.com
+spring.mail.password=${GMAIL_APP_PASSWORD:cofyuorxbeuxabbf}
+
+# Seguranca STARTTLS
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+
+# Debug do envio de e-mails
+spring.mail.properties.mail.debug=true
+
+# Encoding padrao para envio de e-mail
+spring.mail.default-encoding=UTF-8
+
+# Porta do socket
+socket.port=8587
+
+# CORS opcional
+#cors.origins=${CORS_ORIGINS:http://localhost:192.168.0.48}

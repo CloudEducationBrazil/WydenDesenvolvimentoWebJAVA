@@ -1,0 +1,19 @@
+# H2 Connection
+spring.datasource.url=jdbc:h2:mem:tokendb
+#spring.datasource.url=jdbc:h2:file:./data/tokendb;DB_CLOSE_ON_EXIT=FALSE
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.H2Dialect
+spring.datasource.username=sa
+spring.datasource.password=Nekot@2025!*Ct
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.defer-datasource-initialization=true
+
+# H2 Client
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+# Show SQL
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# Modo dev para envitar possuir o token no meu note
+dev.mode=false

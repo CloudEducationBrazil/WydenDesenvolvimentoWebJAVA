@@ -1,0 +1,160 @@
+package com.conttroller.securitycontabil.storage;
+
+import com.sun.jna.platform.win32.Advapi32Util;
+import com.sun.jna.platform.win32.WinReg;
+import com.sun.jna.platform.win32.Crypt32Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Optional;
+
+/**
+ * TokenStorage em Registry, tentando HC(urrent)U primeiro e fazendo fallback para HKU SIDs.
+ */
+@Component
+public class WindowsRegistryTokenStorage implements TokenStorage {
+
+    private static final Logger logger = LoggerFactory.getLogger(WindowsRegistryTokenStorage.class);
+
+    private static final String SUBKEY = "Software\\Lorttnoc\\Snekot";
+
+    // Root preferencial: HKEY_CURRENT_USER
+    private final WinReg.HKEY preferredRoot = WinReg.HKEY_CURRENT_USER;
+    private final String preferredPath = SUBKEY;
+
+    // Possíveis SIDs padrão a tentar (SYSTEM / LocalService / NetworkService)
+    private static final String[] WELL_KNOWN_SIDS = {
+            "S-1-5-18", // Local System
+            "S-1-5-19", // Local Service
+            "S-1-5-20"  // Network Service
+    };
+
+    public WindowsRegistryTokenStorage() {
+        logger.info("WindowsRegistryTokenStorage iniciada. Preferred: HKEY_CURRENT_USER\\" + preferredPath);
+    }
+
+    @Override
+    public void save(String key, String json) throws IOException {
+        // Sempre grava em HKEY_CURRENT_USER primeiro (mapeado para o usuário do processo)
+        try {
+            saveToRoot(preferredRoot, preferredPath, key, json);
+            return;
+        } catch (Exception e) {
+            logger.warn("Falha ao salvar em HKEY_CURRENT_USER, tentando HKU SIDs: {}", e.getMessage());
+        }
+
+        // fallback: tenta gravação em SIDs conhecidos
+        for (String sid : WELL_KNOWN_SIDS) {
+            String path = sid + "\\" + "Software\\Lorttnoc\\Snekot";
+            try {
+                saveToRoot(WinReg.HKEY_USERS, path, key, json);
+                logger.info("Gravado em HKEY_USERS\\{}\\{}", sid, SUBKEY);
+                return;
+            } catch (Exception ex) {
+                logger.warn("Falha ao salvar em HKEY_USERS\\{}: {}", sid, ex.getMessage());
+            }
+        }
+
+        throw new IOException("Não foi possível salvar o valor no Registry em nenhum hive conhecido.");
+    }
+
+    private void saveToRoot(WinReg.HKEY root, String path, String key, String json) {
+        byte[] protectedBytes = Crypt32Util.cryptProtectData(json.getBytes(StandardCharsets.UTF_8));
+        String b64 = Base64.getEncoder().encodeToString(protectedBytes);
+        Advapi32Util.registryCreateKey(root, path);
+        Advapi32Util.registrySetStringValue(root, path, key, b64);
+        logger.info("SAVE Registry {}\\{} = [b64 len={}]", root == WinReg.HKEY_CURRENT_USER ? "HKCU" : "HKU", key, b64.length());
+    }
+
+    @Override
+    public Optional<String> load(String key) throws IOException {
+        // 1) tenta HKCU
+        try {
+            Optional<String> v = loadFromRoot(preferredRoot, preferredPath, key);
+            if (v.isPresent()) return v;
+        } catch (Exception e) {
+            logger.warn("Falha ao ler HKEY_CURRENT_USER: {}", e.getMessage());
+        }
+
+        // 2) tenta HKU\<current user SID> se conseguirmos o username->SID via Advapi32Util (se disponível)
+        try {
+            String username = Advapi32Util.getUserName();
+            try {
+            	try {
+            	    Advapi32Util.Account account = Advapi32Util.getAccountByName(username);
+            	    String sid = account.sidString;
+            	    Optional<String> v = loadFromRoot(WinReg.HKEY_USERS, sid + "\\" + SUBKEY, key);
+            	    if (v.isPresent()) return v;
+            	} catch (Throwable t) {
+            	    logger.debug("Falha ao obter SID via getAccountByName: {}", t.getMessage());
+            	}                
+                
+                if (v.isPresent()) return v;
+            } catch (Throwable t) {
+                logger.debug("getSID não disponível ou falhou: {}", t.getMessage());
+            }
+        } catch (Throwable ignore) {
+            logger.debug("Não foi possível obter username via Advapi32Util.getUserName(): {}", ignore.getMessage());
+        }
+
+        // 3) tenta SIDs conhecidos (SYSTEM / LocalService / NetworkService)
+        for (String sid : WELL_KNOWN_SIDS) {
+            try {
+                Optional<String> v = loadFromRoot(WinReg.HKEY_USERS, sid + "\\" + SUBKEY, key);
+                if (v.isPresent()) return v;
+            } catch (Exception e) {
+                logger.debug("Tentativa HKU\\{} falhou: {}", sid, e.getMessage());
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    private Optional<String> loadFromRoot(WinReg.HKEY root, String path, String key) {
+        if (!Advapi32Util.registryKeyExists(root, path) || !Advapi32Util.registryValueExists(root, path, key)) {
+            return Optional.empty();
+        }
+        String b64 = Advapi32Util.registryGetStringValue(root, path, key);
+        byte[] plainBytes = Crypt32Util.cryptUnprotectData(Base64.getDecoder().decode(b64));
+        String result = new String(plainBytes, StandardCharsets.UTF_8);
+        logger.info("LOAD Registry {}\\{} = [len={}]", root == WinReg.HKEY_CURRENT_USER ? "HKCU" : "HKU", key, result.length());
+        return Optional.of(result);
+    }
+
+    @Override
+    public void delete(String key) throws IOException {
+        // tenta HKCU
+        try {
+            if (Advapi32Util.registryKeyExists(WinReg.HKEY_CURRENT_USER, preferredPath) &&
+                Advapi32Util.registryValueExists(WinReg.HKEY_CURRENT_USER, preferredPath, key)) {
+                Advapi32Util.registryDeleteValue(WinReg.HKEY_CURRENT_USER, preferredPath, key);
+                logger.info("DELETE HKCU\\{}\\{}", preferredPath, key);
+                return;
+            }
+        } catch (Exception e) {
+            logger.warn("Falha ao deletar em HKCU: {}", e.getMessage());
+        }
+
+        // tenta HKU SIDs conhecidos
+        for (String sid : WELL_KNOWN_SIDS) {
+            String path = sid + "\\" + SUBKEY;
+            try {
+                if (Advapi32Util.registryKeyExists(WinReg.HKEY_USERS, path) &&
+                    Advapi32Util.registryValueExists(WinReg.HKEY_USERS, path, key)) {
+                    Advapi32Util.registryDeleteValue(WinReg.HKEY_USERS, path, key);
+                    logger.info("DELETE HKU\\{}\\{}", sid, key);
+                    return;
+                }
+            } catch (Exception e) {
+                logger.debug("Falha ao deletar HKU\\{}: {}", sid, e.getMessage());
+            }
+        }
+
+        // se não encontrou, OK — nada a fazer
+        logger.info("Chave {} não encontrada para deleção em nenhum hive testado.", key);
+    }
+}

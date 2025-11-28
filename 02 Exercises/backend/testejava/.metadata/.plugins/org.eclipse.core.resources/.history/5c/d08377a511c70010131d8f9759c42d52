@@ -1,0 +1,90 @@
+package com.conttroller.securitycontabil.storage;
+
+import com.sun.jna.platform.win32.Advapi32Util;
+import com.sun.jna.platform.win32.WinReg;
+import com.sun.jna.platform.win32.Crypt32Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Optional;
+
+@Component
+public class WindowsRegistryTokenStorage implements TokenStorage {
+
+    private static final Logger logger = LoggerFactory.getLogger(WindowsRegistryTokenStorage.class);
+
+    // Caminho sob HKEY_USERS\<SID>\Software\Lorttnoc\Snekot
+    private static final String SUBKEY = "Software\\Lorttnoc\\Snekot";
+
+    private final WinReg.HKEY rootKey;
+    private final String fullPath;
+
+    public WindowsRegistryTokenStorage() {
+        // Obtém o usuário logado no momento
+        String username = Advapi32Util.getUserName();
+
+        // Obtém o SID corretamente via JNA
+        String sid = Advapi32Util.getUserSID(username);
+        
+        this.rootKey = WinReg.HKEY_USERS;
+        this.fullPath = sid + "\\" + SUBKEY;
+
+        logger.info("WindowsRegistryTokenStorage usando hive: HKEY_USERS\\{}", fullPath);
+    }
+
+    @Override
+    public void save(String key, String json) throws IOException {
+        try {
+            byte[] protectedBytes = Crypt32Util.cryptProtectData(json.getBytes(StandardCharsets.UTF_8));
+            String b64 = Base64.getEncoder().encodeToString(protectedBytes);
+
+            Advapi32Util.registryCreateKey(rootKey, fullPath);
+            Advapi32Util.registrySetStringValue(rootKey, fullPath, key, b64);
+
+            logger.info("SAVE Registry {} = {}", key, json);
+        } catch (Exception e) {
+            logger.error("Erro ao salvar no registro: {}", e.getMessage(), e);
+            throw new IOException(e);
+        }
+    }
+
+    @Override
+    public Optional<String> load(String key) throws IOException {
+        try {
+            if (!Advapi32Util.registryKeyExists(rootKey, fullPath) ||
+                !Advapi32Util.registryValueExists(rootKey, fullPath, key)) {
+                return Optional.empty();
+            }
+
+            String b64 = Advapi32Util.registryGetStringValue(rootKey, fullPath, key);
+            byte[] plainBytes = Crypt32Util.cryptUnprotectData(Base64.getDecoder().decode(b64));
+
+            String result = new String(plainBytes, StandardCharsets.UTF_8);
+
+            logger.info("LOAD Registry {} = {}", key, result);
+
+            return Optional.of(result);
+
+        } catch (Exception e) {
+            logger.warn("Falha ao ler do registro: {}", e.getMessage());
+            return Optional.empty();
+        }
+    }
+
+    @Override
+    public void delete(String key) throws IOException {
+        try {
+            if (Advapi32Util.registryValueExists(rootKey, fullPath, key)) {
+                Advapi32Util.registryDeleteValue(rootKey, fullPath, key);
+                logger.info("DELETE Registry key {}", key);
+            }
+        } catch (Exception e) {
+            logger.warn("Falha ao remover chave no registro: {}", e.getMessage());
+            throw new IOException(e);
+        }
+    }
+}

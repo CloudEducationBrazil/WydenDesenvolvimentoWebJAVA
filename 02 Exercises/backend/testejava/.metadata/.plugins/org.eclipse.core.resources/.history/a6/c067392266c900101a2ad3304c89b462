@@ -1,0 +1,5 @@
+package com.conttroller.securitycontabil.services;
+
+public class LocalizacaoService {
+
+}

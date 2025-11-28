@@ -1,0 +1,154 @@
+package com.conttroller.securitycontabil.storage;
+
+import com.sun.jna.platform.win32.Advapi32Util;
+import com.sun.jna.platform.win32.WinReg;
+import com.sun.jna.platform.win32.Crypt32Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Optional;
+
+/**
+ * TokenStorage com fallback:
+ * 1) Tenta gravar em HKLM (preferência)
+ * 2) Se der Access Denied, usa HKCU
+ */
+@Component
+public class WindowsRegistryTokenStorage implements TokenStorage {
+
+    private static final Logger logger = LoggerFactory.getLogger(WindowsRegistryTokenStorage.class);
+
+    private static final String REG_PATH = "Software\\Lorttnoc\\Snekot";
+
+    // Identificadores dos hives
+    private static final WinReg.HKEY HKLM = WinReg.HKEY_LOCAL_MACHINE;
+    private static final WinReg.HKEY HKCU = WinReg.HKEY_CURRENT_USER;
+
+    // ============================
+    // MÉTODO SAVE
+    // ============================
+    @Override
+    public void save(String key, String json) throws IOException {
+        // Criptografa com DPAPI
+        byte[] protectedBytes = Crypt32Util.cryptProtectData(
+                json.getBytes(StandardCharsets.UTF_8)
+        );
+        String b64 = Base64.getEncoder().encodeToString(protectedBytes);
+
+        // 1) TENTAR GRAVAR EM HKLM
+        try {
+            writeToRegistry(HKLM, key, b64);
+            logger.info("Token salvo em HKLM\\{}\\{}", REG_PATH, key);
+            return;
+        } catch (Exception ex) {
+            logger.warn("Falha ao salvar em HKLM (provavelmente sem permissão): {}", ex.getMessage());
+        }
+
+        // 2) FALLBACK → HKCU
+        try {
+            writeToRegistry(HKCU, key, b64);
+            logger.info("Token salvo em HKCU\\{}\\{}", REG_PATH, key);
+        } catch (Exception ex) {
+            logger.error("Falha ao salvar token até mesmo em HKCU: {}", ex.getMessage(), ex);
+            throw new IOException("Falha ao salvar token no Registro (HKLM e HKCU).", ex);
+        }
+    }
+
+    // ============================
+    // MÉTODO LOAD
+    // ============================
+    @Override
+    public Optional<String> load(String key) throws IOException {
+        // 1) TENTAR CARREGAR DE HKLM
+        try {
+            Optional<String> result = readFromRegistry(HKLM, key);
+            if (result.isPresent()) {
+                logger.info("Token carregado de HKLM\\{}\\{}", REG_PATH, key);
+                return result;
+            }
+        } catch (Exception ex) {
+            logger.warn("Falha ao ler token em HKLM: {}", ex.getMessage());
+        }
+
+        // 2) FALLBACK → HKCU
+        try {
+            Optional<String> result = readFromRegistry(HKCU, key);
+            if (result.isPresent()) {
+                logger.info("Token carregado de HKCU\\{}\\{}", REG_PATH, key);
+                return result;
+            }
+        } catch (Exception ex) {
+            logger.warn("Falha ao ler token em HKCU: {}", ex.getMessage());
+        }
+
+        return Optional.empty();
+    }
+
+    // ============================
+    // MÉTODO DELETE
+    // ============================
+    @Override
+    public void delete(String key) throws IOException {
+        boolean deleted = false;
+
+        try {
+            deleted = deleteFromRegistry(HKLM, key);
+            if (deleted) {
+                logger.info("Token removido de HKLM\\{}\\{}", REG_PATH, key);
+                return;
+            }
+        } catch (Exception ex) {
+            logger.warn("Erro ao deletar token em HKLM: {}", ex.getMessage());
+        }
+
+        try {
+            deleted = deleteFromRegistry(HKCU, key);
+            if (deleted) {
+                logger.info("Token removido de HKCU\\{}\\{}", REG_PATH, key);
+                return;
+            }
+        } catch (Exception ex) {
+            logger.warn("Erro ao deletar token em HKCU: {}", ex.getMessage());
+        }
+
+        if (!deleted) {
+            throw new IOException("Token não encontrado em HKLM nem HKCU.");
+        }
+    }
+
+    // ===========================================================
+    // MÉTODOS INTERNOS – REUTILIZÁVEIS
+    // ===========================================================
+
+    private void writeToRegistry(WinReg.HKEY hive, String key, String b64) {
+        Advapi32Util.registryCreateKey(hive, REG_PATH);
+        Advapi32Util.registrySetStringValue(hive, REG_PATH, key, b64);
+    }
+
+    private Optional<String> readFromRegistry(WinReg.HKEY hive, String key) {
+        if (!Advapi32Util.registryKeyExists(hive, REG_PATH)) return Optional.empty();
+        if (!Advapi32Util.registryValueExists(hive, REG_PATH, key)) return Optional.empty();
+
+        String b64 = Advapi32Util.registryGetStringValue(hive, REG_PATH, key);
+
+        byte[] plain = Crypt32Util.cryptUnprotectData(
+                Base64.getDecoder().decode(b64)
+        );
+
+        return Optional.of(new String(plain, StandardCharsets.UTF_8));
+    }
+
+    private boolean deleteFromRegistry(WinReg.HKEY hive, String key) {
+        if (Advapi32Util.registryKeyExists(hive, REG_PATH) &&
+            Advapi32Util.registryValueExists(hive, REG_PATH, key)) {
+
+            Advapi32Util.registryDeleteValue(hive, REG_PATH, key);
+            return true;
+        }
+        return false;
+    }
+}

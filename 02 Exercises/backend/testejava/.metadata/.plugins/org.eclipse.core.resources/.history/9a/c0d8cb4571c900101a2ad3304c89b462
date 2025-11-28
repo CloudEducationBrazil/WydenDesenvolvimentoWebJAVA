@@ -1,0 +1,459 @@
+package com.conttroller.securitycontabil.services;
+
+import com.conttroller.securitycontabil.dto.*;
+import com.conttroller.securitycontabil.entities.Token;
+import com.conttroller.securitycontabil.interfaces.TokenClient;
+import com.conttroller.securitycontabil.repositories.TokenRepository;
+import com.conttroller.securitycontabil.storage.TokenStorage;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.OffsetDateTime;
+import java.util.*;
+
+import com.sun.jna.platform.win32.*;
+import java.util.stream.Collectors;
+
+@Service
+public class TokenService {
+
+    private static final Logger logger = LoggerFactory.getLogger(TokenService.class);
+   // private static final String PASSWORD_DEFAULT = "lorttnocToken2025@";
+
+    private final TokenClient tokenClient;
+    private final TokenRepository tokenRepository;
+    private final ObjectMapper objectMapper;
+    private final AppContextService appContextService;
+    private final TokenStorage tokenStorage;
+
+    public TokenService(TokenClient tokenClient,
+                        TokenRepository tokenRepository,
+                        ObjectMapper objectMapper,
+                        AppContextService appContextService,
+                        TokenStorage tokenStorage) {
+        this.tokenClient = tokenClient;
+        this.tokenRepository = tokenRepository;
+        this.objectMapper = objectMapper;
+        this.appContextService = appContextService;
+        this.tokenStorage = tokenStorage;
+//        this.executionControl = executionControl;
+    }
+    
+    @Autowired
+    private EntityManager entityManager;
+
+    /** Retorna lista de tokens para Executor */
+    @Transactional
+    public List<Token> carregarTokensParaExecutor() {
+        String cnpj = appContextService.getCnpj();
+        File pastaTokens = appContextService.getCaminho();
+        boolean h2Vazio = tokenRepository.count() == 0;
+
+        List<Token> listaTokens = new ArrayList<>();
+
+        try {
+            if (cnpj != null && pastaTokens != null) {
+                // Chama a API e salva H2
+                TokenEnvioApiContabilidadeDTO envioDto = new TokenEnvioApiContabilidadeDTO(cnpj, "", pastaTokens);
+                TokenRetornoApiContabilidadeDTO retornoDto = tokenClient.postToken(envioDto);
+
+                salvarTokensH2(retornoDto);
+
+                listaTokens = tokenRepository.findAll();
+            } else if (h2Vazio) {
+                // Carrega do storage se H2 estiver vazio
+                carregarTokensDoStorage();
+                listaTokens = tokenRepository.findAll();
+            } else {
+                // Tokens já existem
+                listaTokens = tokenRepository.findAll();
+            }
+        } catch (Exception e) {
+            logger.error("Erro ao carregar tokens para executor: {}", e.getMessage()); // , e
+        }
+
+        return listaTokens;
+    }
+    
+    @Transactional
+    public void salvarTokensH2(TokenRetornoApiContabilidadeDTO dto) {
+    	//if (dto.getServidor() == null || dto.getServidor().getSistemas() == null) return;
+    	// Se Cliente Conttroller EXCLUÍDO da Base de Dados
+    	
+    	boolean h2Vazio = tokenRepository.count() == 0;
+    	
+    	logger.info("H2 Vazio?: {}", tokenRepository.count() > 0);
+    	logger.info("Token Oficial Implantado no Servidor API AZURE: {}", dto.getServidor().getId());
+    	logger.info("Sistemas Contratados: {}", dto.getServidor().getId() != null ? dto.getServidor().getSistemas() : "null");
+
+    	if (!h2Vazio) {
+	    	if ( dto.getServidor().getId() == null || 
+	    		 dto.getServidor().getSistemas() == null ||
+	    		 dto.getServidor().getSistemas().isEmpty() ) {
+	
+	    		logger.warn("Servidor ou sistemas inválidos/vazios. Limpando banco e tokens...");
+	    		limparBancoDeDados();
+	    	    limparTokensDoRegistro();
+	    	    return;
+	    	}
+    	}
+
+/*       dto.getServidor().getSistemas().forEach(sistema -> {
+            if (sistema.getModulos() != null && !sistema.getModulos().isEmpty()) {
+                var settings = sistema.getModulos().get(0).getSettings();
+                if (settings != null) {
+                    String cnpj = dto.getCnpj().trim();
+                    String nomeSistema = sistema.getSistema().trim();
+                    String habilitado = settings.getHabilitado();
+                    String financeiro = settings.getStatusFin();
+                    OffsetDateTime validade = dto.getValidade();
+
+                    try {
+                        tokenRepository.mergeToken(cnpj, nomeSistema, habilitado, financeiro, validade);
+                        logger.info("Token salvo/atualizado via MERGE: {} - {}", cnpj, nomeSistema);
+                    } catch (Exception e) {
+                        logger.error("Erro ao salvar token via MERGE: {} - {}", cnpj, nomeSistema, e);
+                    }
+                }
+            }
+        });
+        */
+    	
+        // 23/10/25 ajuste sistema não CONTRATADO
+        String cnpj = dto.getCnpj().trim();
+        OffsetDateTime validade = dto.getValidade();
+        
+        // Lista de sistemas recebidos da API que possuem módulos válidos
+        /*        List<String> sistemasAPI = dto.getServidor().getSistemas().stream()
+                        .filter(s -> s.getModulos() != null && !s.getModulos().isEmpty())
+                        .map(TokenRetornoApiContabilidadeDTO.SistemaDTO::getSistema)
+                        .toList();
+        */
+                List<String> sistemasAPI = dto.getServidor().getSistemas().stream()
+                        .filter(s -> s.getModulos() != null && !s.getModulos().isEmpty())
+                        .map(TokenRetornoApiContabilidadeDTO.SistemaDTO::getSistema)
+                        .collect(Collectors.toList());
+
+        // Deletar do H2 sistemas que não vieram na API
+        tokenRepository.deleteByCnpjAndSistemaNotIn(cnpj, sistemasAPI);        
+
+        List<String> sistemasEsperados = List.of("FISCAL", "CONTABIL", "FOLHA");
+
+        for (String nomeSistema : sistemasEsperados) {
+            Optional<TokenRetornoApiContabilidadeDTO.SistemaDTO> sistemaOpt = dto.getServidor()
+                    .getSistemas()
+                    .stream()
+                    .filter(s -> s.getSistema().equalsIgnoreCase(nomeSistema))
+                    .findFirst();
+
+            if (sistemaOpt.isEmpty() || sistemaOpt.get().getModulos() == null || sistemaOpt.get().getModulos().isEmpty()) {
+                logger.warn("Sistema {} não retornou módulos. Não será criado registro no H2.", nomeSistema);
+                continue; // pula para o próximo sistema
+            }
+
+            var settings = sistemaOpt.get().getModulos().get(0).getSettings();
+            if (settings == null) {
+                logger.warn("Sistema {} não possui settings. Ignorado.", nomeSistema);
+                continue;
+            }
+
+            String habilitado = settings.getHabilitado();
+            String financeiro = settings.getStatusFin();
+
+            try {
+                tokenRepository.mergeToken(cnpj, nomeSistema, habilitado, financeiro, validade);
+                
+                logger.info("Token salvo/atualizado via MERGE: {} - {} (habilitado={}, financeiro={})",
+                        cnpj, nomeSistema, habilitado, financeiro);
+            } catch (Exception e) {
+                logger.error("Erro ao salvar token via MERGE: {} - {}", cnpj, nomeSistema, e);
+            }
+        }
+        // 23/10/25 ajuste sistema não CONTRATADO
+    }
+    
+    private void carregarTokensDoStorage() throws IOException {
+        Optional<String> jsonOriginal = tokenStorage.load("TokenOriginal");
+        
+        if (jsonOriginal.isPresent()) {
+            TokenRetornoApiContabilidadeDTO originalDto =
+                    objectMapper.readValue(jsonOriginal.get(), TokenRetornoApiContabilidadeDTO.class);
+            
+            salvarTokensH2(originalDto);
+            
+            logger.info("Tokens carregados do storage com sucesso.");
+        } else {
+            logger.warn("Nenhum token encontrado no storage.");
+        }
+    }
+
+    private void salvarTokensEmDisco(TokenRetornoApiContabilidadeDTO dto, File pastaTokens) throws IOException {
+
+    	if (pastaTokens == null) {
+    	    throw new IllegalArgumentException("pastaTokens é null, não é possível salvar os tokens em disco");
+    	}
+    	
+    	pastaTokens.mkdirs();
+        
+        String jsonOriginal = objectMapper.writeValueAsString(dto);
+        String jsonReduzido = objectMapper.writeValueAsString(mapearParaMinDTO(dto));
+
+        try (FileWriter fwO = new FileWriter(new File(pastaTokens, "token_contabilidade_ori.json"));
+             FileWriter fwR = new FileWriter(new File(pastaTokens, "token_contabilidade_red.json"))) {
+            fwO.write(jsonOriginal);
+            fwR.write(jsonReduzido);
+        }
+        
+        //logger.info("Tokens salvos em disco em {}", pastaTokens.getAbsolutePath());
+    }
+
+    private TokenRetornoApiContabilidadeMinDTO mapearParaMinDTO(TokenRetornoApiContabilidadeDTO dtoCompleto) {
+
+ /*   	TokenRetornoApiContabilidadeMinDTO dtoMin = new TokenRetornoApiContabilidadeMinDTO();
+
+        dtoMin.setId(dtoCompleto.getId());
+        dtoMin.setCnpj(dtoCompleto.getCnpj());
+        dtoMin.setValidade(dtoCompleto.getValidade());
+        dtoMin.setAssinatura(dtoCompleto.getAssinatura());
+
+        if (dtoCompleto.getServidor() != null && dtoCompleto.getServidor().getSistemas() != null) {
+            dtoCompleto.getServidor().getSistemas().forEach(sistema -> {
+                if (sistema.getModulos() != null && !sistema.getModulos().isEmpty()) {
+                    var settings = sistema.getModulos().get(0).getSettings();
+                    if (settings != null) {
+                        TokenRetornoApiContabilidadeMinDTO.SistemaDTO sistemaMin = new TokenRetornoApiContabilidadeMinDTO.SistemaDTO();
+                        sistemaMin.setHabilitado(settings.getHabilitado());
+                        sistemaMin.setStatusFin(settings.getStatusFin());
+                        switch (sistema.getSistema().toUpperCase()) {
+                            case "FISCAL" -> dtoMin.setFiscal(sistemaMin);
+                            case "CONTABIL" -> dtoMin.setContabil(sistemaMin);
+                            case "FOLHA" -> dtoMin.setFolha(sistemaMin);
+                        }
+                    }
+                }
+            });
+        }
+        */
+    	
+        // 23/10/25 ajuste sistema não CONTRATADO
+        TokenRetornoApiContabilidadeMinDTO dtoMin = new TokenRetornoApiContabilidadeMinDTO();
+
+        dtoMin.setId(dtoCompleto.getId());
+        dtoMin.setCnpj(dtoCompleto.getCnpj());
+        dtoMin.setValidade(dtoCompleto.getValidade());
+        dtoMin.setAssinatura(dtoCompleto.getAssinatura());
+
+        // Lista de sistemas que sempre devem existir
+        List<String> sistemasEsperados = List.of("FISCAL", "CONTABIL", "FOLHA");
+
+        for (String nomeSistema : sistemasEsperados) {
+            TokenRetornoApiContabilidadeMinDTO.SistemaDTO sistemaMin = new TokenRetornoApiContabilidadeMinDTO.SistemaDTO();
+            sistemaMin.setHabilitado(null);
+            sistemaMin.setStatusFin(null);
+
+            if (dtoCompleto.getServidor() != null && dtoCompleto.getServidor().getSistemas() != null) {
+                Optional<TokenRetornoApiContabilidadeDTO.SistemaDTO> sistemaOpt = dtoCompleto.getServidor()
+                        .getSistemas()
+                        .stream()
+                        .filter(s -> s.getSistema().equalsIgnoreCase(nomeSistema))
+                        .findFirst();
+
+                if (sistemaOpt.isPresent() && sistemaOpt.get().getModulos() != null && !sistemaOpt.get().getModulos().isEmpty()) {
+                    var settings = sistemaOpt.get().getModulos().get(0).getSettings();
+                    if (settings != null) {
+                        sistemaMin.setHabilitado(settings.getHabilitado());
+                        sistemaMin.setStatusFin(settings.getStatusFin());
+                    }
+                }
+            }
+
+            switch (nomeSistema.toUpperCase()) {
+                case "FISCAL" -> dtoMin.setFiscal(sistemaMin);
+                case "CONTABIL" -> dtoMin.setContabil(sistemaMin);
+                case "FOLHA" -> dtoMin.setFolha(sistemaMin);
+            }
+        }
+        // 23/10/25 ajuste sistema não CONTRATADO
+        
+        return dtoMin;
+    }
+    
+    public TokenRetornoApiContabilidadeDTO postTokenContabilidade(TokenEnvioApiContabilidadeDTO body) throws Exception {
+        // Chama a API e obtém os tokens
+        TokenRetornoApiContabilidadeDTO retornoDto = tokenClient.postToken(body);
+
+        // NAO APAGAR - GARVACAO EM DISCO
+        File pastaTokens = body.getCaminho();
+
+        // Salvar os tokens em disco
+        salvarTokensEmDisco(retornoDto, pastaTokens);
+        
+        // Salvar no storage
+        tokenStorage.save("TokenOriginal", objectMapper.writeValueAsString(retornoDto));
+        TokenRetornoApiContabilidadeMinDTO minDto = mapearParaMinDTO(retornoDto);
+        tokenStorage.save("TokenReduzido", objectMapper.writeValueAsString(minDto));
+
+        // Salvar ou atualizar tokens no H2 (upsert seguro)
+        salvarTokensH2(retornoDto);
+
+        return retornoDto;
+    }
+
+/*
+    @Transactional
+    public void salvarOuAtualizarToken(TokenRetornoApiContabilidadeDTO dto) {
+        if (dto == null || dto.getCnpj() == null || dto.getCnpj().isBlank()) {
+            logger.warn("DTO ou CNPJ vazio. Abortando atualização.");
+            return;
+        }
+
+        if (dto.getServidor() == null || dto.getServidor().getSistemas() == null) return;
+
+        dto.getServidor().getSistemas().forEach(sistema -> {
+            if (sistema.getModulos() != null && !sistema.getModulos().isEmpty()) {
+                var settings = sistema.getModulos().get(0).getSettings();
+                if (settings != null) {
+                    String cnpj = dto.getCnpj().trim();
+                    String nomeSistema = sistema.getSistema().trim();
+                    String habilitado = settings.getHabilitado();
+                    String financeiro = settings.getStatusFin();
+                    OffsetDateTime validade = dto.getValidade();
+
+                    try {
+                        tokenRepository.mergeToken(cnpj, nomeSistema, habilitado, financeiro, validade);
+                        logger.info("Token salvo/atualizado via MERGE: {} - {}", cnpj, nomeSistema);
+                    } catch (Exception e) {
+                        logger.error("Erro ao salvar token via MERGE: {} - {}", cnpj, nomeSistema, e);
+                    }
+                }
+            }
+        });
+    }
+*/   
+    
+    // 24/10/25 - Heleno
+    @Transactional
+    public void salvarOuAtualizarToken(TokenRetornoApiContabilidadeDTO dto) {
+        if (dto == null || dto.getCnpj() == null || dto.getCnpj().isBlank()) {
+            logger.warn("DTO ou CNPJ vazio. Abortando atualização.");
+            return;
+        }
+
+        if (dto.getServidor() == null || dto.getServidor().getSistemas() == null) {
+            logger.warn("Servidor ou lista de sistemas nulos. Abortando atualização.");
+            return;
+        }
+
+        dto.getServidor().getSistemas().forEach(sistema -> {
+            if (sistema.getModulos() != null && !sistema.getModulos().isEmpty()) {
+                var settings = sistema.getModulos().get(0).getSettings();
+                if (settings != null) {
+                    String cnpj = dto.getCnpj().trim();
+                    String nomeSistema = sistema.getSistema() != null ? sistema.getSistema().trim() : "DESCONHECIDO";
+                    
+                    // ✅ Proteção contra null
+                    String habilitado = Optional.ofNullable(settings.getHabilitado()).orElse("N");
+                    String financeiro = Optional.ofNullable(settings.getStatusFin()).orElse("N");
+                    OffsetDateTime validade = dto.getValidade();
+
+                    try {
+                        tokenRepository.mergeToken(cnpj, nomeSistema, habilitado, financeiro, validade);
+                        logger.info("Token salvo/atualizado via MERGE: {} - {} (habilitado={}, financeiro={})",
+                                cnpj, nomeSistema, habilitado, financeiro);
+                    } catch (Exception e) {
+                        logger.error("Erro ao salvar token via MERGE: {} - {}", cnpj, nomeSistema, e);
+                    }
+                }
+            }
+        });
+    }
+    // 24/10/25 - Heleno
+    
+ /*   public void limparTokensDoRegistro() {
+        try {
+            // Caminho do registro (ajuste conforme onde você grava seus tokens)
+            String regPath = "HKCU\\Software\\Lorttnoc\\Snekot";
+
+            // Atualiza o valor de TokenOriginal para vazio
+            ProcessBuilder pb1 = new ProcessBuilder("reg", "add", regPath, "/v", "TokenOriginal", "/t", "REG_SZ", "/d", "", "/f"); // null
+            pb1.start().waitFor();
+
+            // Atualiza o valor de TokenReduzido para vazio
+            ProcessBuilder pb2 = new ProcessBuilder("reg", "add", regPath, "/v", "TokenReduzido", "/t", "REG_SZ", "/d", "", "/f"); // null
+            pb2.start().waitFor();
+
+            logger.info("Tokens do registro limpos com sucesso.");
+        } catch (Exception e) {
+            logger.error("Erro ao limpar tokens do registro: {}", e.getMessage(),e);
+        }
+    }
+ */
+    
+    public void limparTokensDoRegistro() {
+        try {
+            String regPath = "Software\\Lorttnoc\\Snekot";
+
+            if (Advapi32Util.registryValueExists(WinReg.HKEY_LOCAL_MACHINE, regPath, "TokenOriginal")) {
+                Advapi32Util.registryDeleteValue(WinReg.HKEY_LOCAL_MACHINE, regPath, "TokenOriginal");
+            }
+
+            if (Advapi32Util.registryValueExists(WinReg.HKEY_LOCAL_MACHINE, regPath, "TokenReduzido")) {
+                Advapi32Util.registryDeleteValue(WinReg.HKEY_LOCAL_MACHINE, regPath, "TokenReduzido");
+            }
+
+            logger.info("Tokens REG_BINARY removidos com sucesso.");
+        } catch (Exception e) {
+            logger.error("Erro ao limpar tokens do registry: {}", e.getMessage(), e);
+        }
+    }
+    
+    @Transactional
+    public void limparBancoDeDados() {
+    	// 24/10/25 - Heleno
+  	//    var transaction = entityManager.getTransaction();
+
+  	    try {
+        	
+        	// 24/10/25 - Heleno
+      //      if (!transaction.isActive()) {
+        //        transaction.begin();
+          //  }        	
+        	
+            entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY FALSE").executeUpdate();
+
+            @SuppressWarnings("unchecked")
+            List<String> tabelas = (List<String>) entityManager.createNativeQuery(
+                "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='PUBLIC'"
+            ).getResultList();
+
+            for (String tabela : tabelas) {
+                try {
+                    entityManager.createNativeQuery("TRUNCATE TABLE " + tabela).executeUpdate();
+                    logger.info("Tabela limpa: {}", tabela);
+                } catch (Exception e) {
+                    logger.error("Erro ao limpar tabela {}: {}", tabela, e.getMessage(), e);
+                }            }
+
+            entityManager.createNativeQuery("SET REFERENTIAL_INTEGRITY TRUE").executeUpdate();
+            
+            //transaction.commit();
+            logger.info("Banco H2 limpo com sucesso!");
+        } catch (Exception e) {
+        	// 24/10/25 - Heleno
+            //if (transaction.isActive()) {
+            //    transaction.rollback();
+           // }
+            
+            logger.error("Erro ao limpar banco H2: {}", e.getMessage(), e);
+        }
+    }    
+ }

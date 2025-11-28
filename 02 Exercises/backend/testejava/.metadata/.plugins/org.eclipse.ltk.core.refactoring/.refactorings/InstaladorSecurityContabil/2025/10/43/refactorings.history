@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;instalador.InstaladorPrincipal&apos; to &apos;InstaladorPrincipalAnt&apos;&#x0D;&#x0A;- Original project: &apos;InstaladorSecurityContabil&apos;&#x0D;&#x0A;- Original element: &apos;instalador.InstaladorPrincipal&apos;&#x0D;&#x0A;- Renamed element: &apos;instalador.InstaladorPrincipalAnt&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;InstaladorPrincipal&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;instalador{InstaladorPrincipal.java[InstaladorPrincipal" matchStrategy="1" name="InstaladorPrincipalAnt" qualified="false" references="true" similarDeclarations="false" stamp="1761331020464" textual="false" version="1.0"/>
+</session>

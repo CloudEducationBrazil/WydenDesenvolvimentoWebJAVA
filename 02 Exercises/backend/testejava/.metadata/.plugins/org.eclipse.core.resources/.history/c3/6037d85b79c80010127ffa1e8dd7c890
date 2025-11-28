@@ -1,0 +1,42 @@
+package com.conttroller.installSecurityConttrolJ21;
+
+import java.nio.file.Path;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import com.sun.jna.platform.win32.Advapi32Util;
+import com.sun.jna.platform.win32.WinReg;
+
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class InstallSecurityConttrolJ21Application {
+	
+    private static final String JAR_NAME = "securitycontabil.jar";
+    private static final String SERVICE_NAME = "TokenService";
+    
+    private static final String NOME_ARQUIVO = "securityconttrol.ini";
+    private static final Path CAMINHO_ARQUIVO = Path.of(NOME_ARQUIVO);
+    private static final String SECAO = "[EMPRESA]";    
+
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_YELLOW = "\u001B[33m";
+    private static final String ANSI_CYAN = "\u001B[36m";
+    
+    private static final String REG_PATH = "Software\\Lorttnoc\\Snekot";
+    private static final String REG_TOKEN_NAME = "token"; // nome do valor do registro   	
+
+	public static void main(String[] args) {
+		SpringApplication.run(InstallSecurityConttrolJ21Application.class, args);
+		System.out.println("ff");
+	}
+
+}

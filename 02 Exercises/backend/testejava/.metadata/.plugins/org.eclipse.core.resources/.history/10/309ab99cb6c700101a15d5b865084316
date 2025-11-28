@@ -1,0 +1,204 @@
+package com.conttroller.securitycontabil.storage;
+
+import com.sun.jna.platform.win32.Advapi32Util;
+import com.sun.jna.platform.win32.Win32Exception;
+import com.sun.jna.platform.win32.WinReg;
+import com.sun.jna.platform.win32.Crypt32Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.Optional;
+
+/**
+ * TokenStorage com fallback:
+ *
+ * 1º: Tenta HKLM
+ * 2º: Se Acesso negado (ERROR_ACCESS_DENIED) ou desencriptação falhar, usa HKCU
+ */
+@Component
+public class WindowsRegistryTokenStorage implements TokenStorage {
+
+    private static final Logger logger = LoggerFactory.getLogger(WindowsRegistryTokenStorage.class);
+
+    private static final String REG_PATH = "Software\\Lorttnoc\\Snekot";
+
+    // ---------- SAVE ----------
+    @Override
+    public void save(String key, String json) throws IOException {
+        try {
+            saveHKLM(key, json);
+        } catch (Win32Exception w) {
+            // Se for Access Denied, tenta HKCU
+            if (isAccessDenied(w)) {
+                logger.warn("Sem permissão para HKLM (erro {}). Tentando salvar no HKCU…", w.getErrorCode());
+                saveHKCU(key, json);
+            } else {
+                logger.error("Erro Win32 ao salvar em HKLM: {}", w.getMessage(), w);
+                throw new IOException("Falha ao salvar token no Registro (HKLM).", w);
+            }
+        } catch (Exception e) {
+            // Caso genérico (p.ex. Crypt32 fail) — log e repassa
+            logger.error("Erro inesperado ao salvar em HKLM: {}", e.getMessage(), e);
+            throw new IOException("Falha ao salvar token no Registro.", e);
+        }
+    }
+
+    private void saveHKLM(String key, String json) {
+        byte[] protectedData = Crypt32Util.cryptProtectData(json.getBytes(StandardCharsets.UTF_8));
+        String encoded = Base64.getEncoder().encodeToString(protectedData);
+
+        Advapi32Util.registryCreateKey(WinReg.HKEY_LOCAL_MACHINE, REG_PATH);
+        Advapi32Util.registrySetStringValue(WinReg.HKEY_LOCAL_MACHINE, REG_PATH, key, encoded);
+
+        logger.info("Token salvo em HKLM\\{}\\{}", REG_PATH, key);
+    }
+
+    private void saveHKCU(String key, String json) throws IOException {
+        try {
+            byte[] protectedData = Crypt32Util.cryptProtectData(json.getBytes(StandardCharsets.UTF_8));
+            String encoded = Base64.getEncoder().encodeToString(protectedData);
+
+            Advapi32Util.registryCreateKey(WinReg.HKEY_CURRENT_USER, REG_PATH);
+            Advapi32Util.registrySetStringValue(WinReg.HKEY_CURRENT_USER, REG_PATH, key, encoded);
+
+            logger.info("Token salvo em HKCU\\{}\\{}", REG_PATH, key);
+        } catch (Win32Exception w) {
+            logger.error("Erro Win32 ao salvar em HKCU: {}", w.getMessage(), w);
+            throw new IOException("Falha ao salvar token no Registro (HKCU).", w);
+        } catch (Exception e) {
+            logger.error("Erro ao salvar token em HKCU: {}", e.getMessage(), e);
+            throw new IOException("Falha ao salvar token no Registro (HKCU).", e);
+        }
+    }
+
+    // ---------- LOAD ----------
+    @Override
+    public Optional<String> load(String key) throws IOException {
+        // Tenta HKLM primeiro; se existir mas criptografia falhar, tenta HKCU
+        try {
+            Optional<String> hk = loadHKLM(key);
+            if (hk.isPresent()) {
+                return hk;
+            }
+        } catch (Win32Exception w) {
+            if (isAccessDenied(w)) {
+                logger.warn("Sem permissão para ler HKLM (erro {}). Tentando HKCU…", w.getErrorCode());
+            } else {
+                logger.warn("Erro Win32 ao ler HKLM: {}. Tentando HKCU…", w.getMessage());
+            }
+        } catch (IOException e) {
+            // Se cryptUnprotectData falhar com "não pode encontrar o caminho especificado"
+            logger.warn("Falha ao ler/desencriptar valor em HKLM: {}. Tentando HKCU…", e.getMessage());
+        } catch (Exception e) {
+            logger.warn("Erro inesperado ao ler HKLM: {}. Tentando HKCU…", e.getMessage());
+        }
+
+        // fallback HKCU
+        return loadHKCU(key);
+    }
+
+    private Optional<String> loadHKLM(String key) throws IOException {
+        if (!Advapi32Util.registryKeyExists(WinReg.HKEY_LOCAL_MACHINE, REG_PATH)) {
+            return Optional.empty();
+        }
+        if (!Advapi32Util.registryValueExists(WinReg.HKEY_LOCAL_MACHINE, REG_PATH, key)) {
+            return Optional.empty();
+        }
+
+        String b64 = Advapi32Util.registryGetStringValue(WinReg.HKEY_LOCAL_MACHINE, REG_PATH, key);
+        if (b64 == null || b64.isBlank()) {
+            return Optional.empty();
+        }
+
+        try {
+            byte[] plain = Crypt32Util.cryptUnprotectData(Base64.getDecoder().decode(b64));
+            String result = new String(plain, StandardCharsets.UTF_8);
+
+            logger.info("Token carregado de HKLM\\{}\\{}", REG_PATH, key);
+            return Optional.of(result);
+        } catch (Win32Exception w) {
+            // Desencriptação falhou (p.ex. dados protegidos por outro account/escopo) -> relança para o caller decidir fallback
+            logger.warn("cryptUnprotectData falhou para HKLM (erro {}): {}",
+                    w.getErrorCode(), w.getMessage());
+            throw new IOException("Falha ao desencriptar valor em HKLM.", w);
+        } catch (Exception e) {
+            logger.warn("Erro ao desencriptar valor em HKLM: {}", e.getMessage(), e);
+            throw new IOException("Falha ao desencriptar valor em HKLM.", e);
+        }
+    }
+
+    private Optional<String> loadHKCU(String key) throws IOException {
+        try {
+            if (!Advapi32Util.registryKeyExists(WinReg.HKEY_CURRENT_USER, REG_PATH)) {
+                return Optional.empty();
+            }
+            if (!Advapi32Util.registryValueExists(WinReg.HKEY_CURRENT_USER, REG_PATH, key)) {
+                return Optional.empty();
+            }
+
+            String b64 = Advapi32Util.registryGetStringValue(WinReg.HKEY_CURRENT_USER, REG_PATH, key);
+            if (b64 == null || b64.isBlank()) {
+                return Optional.empty();
+            }
+
+            byte[] plain = Crypt32Util.cryptUnprotectData(Base64.getDecoder().decode(b64));
+            String result = new String(plain, StandardCharsets.UTF_8);
+
+            logger.info("Token carregado de HKCU\\{}\\{}", REG_PATH, key);
+            return Optional.of(result);
+        } catch (Win32Exception w) {
+            logger.warn("Erro Win32 ao carregar token em HKCU: {} - {}", w.getErrorCode(), w.getMessage(), w);
+            return Optional.empty();
+        } catch (Exception e) {
+            logger.warn("Erro ao carregar token em HKCU: {}", e.getMessage(), e);
+            return Optional.empty();
+        }
+    }
+
+    // ---------- DELETE ----------
+    @Override
+    public void delete(String key) throws IOException {
+        try {
+            deleteHKLM(key);
+        } catch (Win32Exception w) {
+            if (isAccessDenied(w)) {
+                logger.warn("Sem permissão para deletar em HKLM (erro {}). Tentando HKCU…", w.getErrorCode());
+                deleteHKCU(key);
+            } else {
+                logger.warn("Erro Win32 ao deletar em HKLM: {}. Tentando HKCU…", w.getMessage());
+                deleteHKCU(key);
+            }
+        } catch (Exception e) {
+            logger.warn("Erro ao deletar em HKLM: {}. Tentando HKCU…", e.getMessage());
+            deleteHKCU(key);
+        }
+    }
+
+    private void deleteHKLM(String key) {
+        if (Advapi32Util.registryKeyExists(WinReg.HKEY_LOCAL_MACHINE, REG_PATH) &&
+            Advapi32Util.registryValueExists(WinReg.HKEY_LOCAL_MACHINE, REG_PATH, key)) {
+
+            Advapi32Util.registryDeleteValue(WinReg.HKEY_LOCAL_MACHINE, REG_PATH, key);
+            logger.info("Token deletado de HKLM\\{}\\{}", REG_PATH, key);
+        }
+    }
+
+    private void deleteHKCU(String key) {
+        if (Advapi32Util.registryKeyExists(WinReg.HKEY_CURRENT_USER, REG_PATH) &&
+            Advapi32Util.registryValueExists(WinReg.HKEY_CURRENT_USER, REG_PATH, key)) {
+
+            Advapi32Util.registryDeleteValue(WinReg.HKEY_CURRENT_USER, REG_PATH, key);
+            logger.info("Token deletado de HKCU\\{}\\{}", REG_PATH, key);
+        }
+    }
+
+    // ---------- HELPERS ----------
+    private boolean isAccessDenied(Win32Exception w) {
+        // Código 5 = ERROR_ACCESS_DENIED
+        return w != null && w.getErrorCode() == 5;
+    }
+}
