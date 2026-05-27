@@ -1,0 +1,98 @@
+executarProcesso(new String[]{
+        nssmPath, "install", SERVICE_NAME, javaPath,
+        "-jar", jarFile.getAbsolutePath(),
+        cnpj,
+        caminhoInformado,
+        token
+}, "Instalando serviço com parâmetros", logPath);
+
+
+executarProcesso(new String[]{nssmPath, "stop", SERVICE_NAME}, "Parando serviço existente (se houver)", logPath);
+executarProcesso(new String[]{nssmPath, "remove", SERVICE_NAME, "confirm"}, "Removendo serviço existente", logPath);
+
+try {
+    Thread.sleep(3000);
+} catch (InterruptedException e) {
+    Thread.currentThread().interrupt();
+}
+
+executarProcesso(new String[]{
+        nssmPath, "install", SERVICE_NAME, javaPath,
+        "-jar", jarFile.getAbsolutePath(),
+        cnpj,
+        caminhoInformado,
+        token
+}, "Instalando serviço com parâmetros", logPath);
+
+executarProcesso(new String[]{nssmPath, "set", SERVICE_NAME, "AppDirectory", caminhoInformado},
+        "Configurando diretório de trabalho", logPath);
+
+executarProcesso(new String[]{nssmPath, "set", SERVICE_NAME, "Start", "SERVICE_AUTO_START"},
+        "Configurando inicialização automática", logPath);
+
+executarProcesso(new String[]{nssmPath, "start", SERVICE_NAME}, "Iniciando serviço", logPath);
+
+IPv4: 54.232.189.113(Preferencial) rede virtual
+IPv4: 192.168.100.1 wifi
+IPv4: 192.168.10.10 local TELNET 127.0.0.1 8587
+
+cnpj 77881672587
+
+INSTALAR COM NSSM DE FORMA MANUAL
+
+Conferir o caminho do serviço
+
+ cmd (Admin):
+ 
+sc qc TokenService
+BINARY_PATH_NAME
+
+remover instâncias
+kill instâncias: taskkill /f /im TokenService.exe
+taskkill /f /im securitycontabil.jar
+
+remover o service: 
+   taskkill /f /im java.exe
+
+   sc stop TokenService
+
+   sc delete TokenService
+   
+	OU
+
+   nssm stop tokenservice 
+   nssm remove tokenservice 
+
+No cmd administrador: c:\conttrol\nssm\win64\nssm install TokenService
+
+
+Path
+: C:\conttrol\java\bin\java.exe
+
+
+Arguments
+pelo nssm
+-jar C:\conttrol\securitycontabil.jar 77881672587 C:\conttrol 397d8966c436425d8d40df8189a06aa9
+
+pelo cmd JAVA
+nssm install TokenService C:\conttrol\java\bin\java.exe -jar C:\conttrol\securitycontabil.jar 77881672587 C:\conttrol 397d8966c436425d8d40df8189a06aa9
+nssm edit TokenService
+
+Startup directory
+: C:\conttrol
+
+
+Aba I/O:
+
+stdout:
+ C:\conttrol\out.log
+
+stderr:
+ C:\conttrol\err.log
+
+
+Aba process
+
+Priority: Normal
+Affinit:  Default
+Console window: Desmarcado
