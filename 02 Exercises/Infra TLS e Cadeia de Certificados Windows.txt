@@ -1,0 +1,99 @@
+Executar o Windows Update para atualizar:
+
+. Cadeia de certificados raiz do Windows (Trusted Root Certification Authorities)
+. Atualizações de segurança do SChannel, que é o componente do Windows responsável pelo SSL/TLS
+. Atualizações do .NET Framework (quando houver versões instaladas e suportadas)
+
+Verificar/Confirmar, em OPÇÕES DE INTERNET:
+. Se os TLS 1.2 / TLS 1.3 estão marcados
+
+Instalar CERTIFICADO DIGITAL DO CLIENTE
+. Certificados digitais (A1/A3) da Cadeia certificadora Sectigo
+
+Sistemas CONTTROLLER:
+. DLL compilada em .NET Framework 4.7.2 ou superior (ideal 4.8/4.8.1);
+. Validador eSocial/REINFO na linguagem C# usando: 
+ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault; ou 
+ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12; 
+ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13;
+
+O WebService eSocial, Integração com eSocial, testa/verifica:
+
+. TLS 1.2 / TLS 1.3
+. Certificados digitais (A1/A3) - Cadeia certificadora Sectigo
+.NET Framework
+
+=========== CMD - comandos .bat de análise de Ambiente modo SHELL =============== 
+
+-- VERSÃO DO WINDOWS
+winver ; ver => Windows e versão?
+
+-- Arquitetura
+wmic os get osarchitecture OU echo %PROCESSOR_ARCHITECTURE% >= arquitetura
+
+-- DOTNET versão .net framework
+dotnet --list-runtimes
+dotnet --info
+
+reg query "HKLM\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" /v Release
+
+dir %WINDIR%\Microsoft.NET\Framework 
+dir %WINDIR%\Microsoft.NET\Framework64
+dir %WINDIR%\Microsoft.NET\Framework\v4*
+
+-- FORÇAR ATUALIZAÇÃO DO CERTIFICADO RAIZ - CMD como administrador
+certutil -generateSSTFromWU certificados.sst
+certutil -generateSSTFromWU roots.sst
+
+Nota: por certificados contendo: Sectigo; USERTrust; AAA Certificate Services
+
+-- Verificar se o serviço de atualização automática está habilitado - Deve Retornar: STATE : 4 RUNNING
+sc query CryptSvc
+
+-- Teste específico do eSocial, se retornar resposta sem erro de certificado, a cadeia de confiança do Windows
+certutil -verifyctl AuthRoot 
+
+-- VISUAL DOS CERTIFICADOS - CADEIA DOS CERTIFICADOS
+certmgr.msc
+
+-- TLS instalados
+[System.Enum]::GetNames([Net.SecurityProtocolType])
+
+-- suítes de criptografia TLS MANUAL dos protocolos TLS no Registro do Windows, senão exibir NADA, eh pq não existe MANUAL
+reg query "HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols"
+
+
+=========== PW ou Powershell  - comandos em objetos .NET de análise de Ambiente modo SHELL =============== 
+
+-- TLS instalados
+[System.Enum]::GetNames([Net.SecurityProtocolType])
+
+-- suítes de criptografia TLS
+Get-TlsCipherSuite
+
+-- VERSÃO TLS em uso
+[Net.ServicePointManager]::SecurityProtocol
+
+-- VERSÃO DO .NET FRAMEWORK
+Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP'
+Get-ChildItem 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4'
+
+Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full' | Select Release
+
+-- VERIFICAR SE A CADEIA CERTIFICADORA SERTIGO ESTÁ ATUALIZADA ROOT
+Get-ChildItem Cert:\LocalMachine\Root | Where-Object {$_.Subject -like "*Sectigo*"}
+
+-- VERIFICAR SE EXISTE CERTIFICADOS DA SERTIGO INSTALADO
+Get-ChildItem Cert:\LocalMachine\CA | Where-Object {$_.Subject -like "*Sectigo*"}
+
+-- VISUAL DOS CERTIFICADOS - CADEIA DOS CERTIFICADOS
+certlm.msc
+
+=====================================
+Atenção no C#
+ServicePointManager.SecurityProtocol = SecurityProtocolType.SystemDefault;
+					ao invés
+ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+-- Verificar a data da última atualização do Windows
+Get-HotFix | Sort-Object InstalledOn -Descending | Select-Object -First 10
